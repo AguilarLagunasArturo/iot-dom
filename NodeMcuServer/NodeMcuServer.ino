@@ -14,12 +14,6 @@ int sliderVal = 0;
 const char* ssid     = "INFINITUM2372_2.4";
 const char* password = "uH0L0Ybioa";
 
-//const char* ssid     = "3Com";
-//const char* password = "";
-
-//const char* ssid     = "INFINITUM5413_2.4";
-//const char* password = "r4raEWFv0P";
-
 //Static IP address configuration 
 // static:  192.168.1.77
 // gateway: 192.168.1.254
