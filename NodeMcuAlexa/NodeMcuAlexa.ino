@@ -37,17 +37,15 @@
 #include <SinricProSwitch.h>
 
 #define WIFI_SSID         "INFINITUM2372_2.4"    
-#define WIFI_PASS         ""
-#define APP_KEY           ""
-#define APP_SECRET        ""
-#define SWITCH_ID         ""
+#define WIFI_PASS         "uH0L0Ybioa"
+#define APP_KEY           "0ebe9f16-2810-4aec-ac14-b45947a3bd53"
+#define APP_SECRET        "39b88368-2ed9-4d7c-8836-89593c493af0-d45ba1ad-bf43-467a-b68f-191564767cab"
+#define SWITCH_ID         "60456f2e1516f07c9023c6af"
 #define BAUD_RATE         115200                // Change baudrate to your need
 
-#define BUTTON_PIN 0   // GPIO for BUTTON (inverted: LOW = pressed, HIGH = released)
-#define LED_PIN   2   // GPIO for LED (inverted)
+#define LED_PIN   4   // GPIO for LED (inverted)
 
 bool myPowerState = false;
-unsigned long lastBtnPress = 0;
 
 /* bool onPowerState(String deviceId, bool &state) 
  *
@@ -67,26 +65,6 @@ bool onPowerState(const String &deviceId, bool &state) {
   myPowerState = state;
   digitalWrite(LED_PIN, myPowerState?LOW:HIGH);
   return true; // request handled properly
-}
-
-void handleButtonPress() {
-  unsigned long actualMillis = millis(); // get actual millis() and keep it in variable actualMillis
-  if (digitalRead(BUTTON_PIN) == LOW && actualMillis - lastBtnPress > 1000)  { // is button pressed (inverted logic! button pressed = LOW) and debounced?
-    if (myPowerState) {     // flip myPowerState: if it was true, set it to false, vice versa
-      myPowerState = false;
-    } else {
-      myPowerState = true;
-    }
-    digitalWrite(LED_PIN, myPowerState?LOW:HIGH); // if myPowerState indicates device turned on: turn on led (builtin led uses inverted logic: LOW = LED ON / HIGH = LED OFF)
-
-    // get Switch device back
-    SinricProSwitch& mySwitch = SinricPro[SWITCH_ID];
-    // send powerstate event
-    mySwitch.sendPowerStateEvent(myPowerState); // send the new powerState to SinricPro server
-    //Serial.printf("Device %s turned %s (manually via flashbutton)\r\n", mySwitch.getDeviceId().toString().c_str(), myPowerState?"on":"off");
-
-    lastBtnPress = actualMillis;  // update last button press variable
-  } 
 }
 
 // setup function for WiFi connection
@@ -117,7 +95,6 @@ void setupSinricPro() {
 
 // main setup function
 void setup() {
-  pinMode(BUTTON_PIN, INPUT_PULLUP); // GPIO 0 as input, pulled high
   pinMode(LED_PIN, OUTPUT); // define LED GPIO as output
   digitalWrite(LED_PIN, HIGH); // turn off LED on bootup
 
@@ -127,6 +104,5 @@ void setup() {
 }
 
 void loop() {
-  handleButtonPress();
   SinricPro.handle();
 }
