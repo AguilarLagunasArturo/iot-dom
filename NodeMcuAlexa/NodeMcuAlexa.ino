@@ -36,11 +36,11 @@
 #include <SinricPro.h>
 #include <SinricProSwitch.h>
 
-#define WIFI_SSID         "INFINITUM2372_2.4"    
-#define WIFI_PASS         "uH0L0Ybioa"
-#define APP_KEY           "0ebe9f16-2810-4aec-ac14-b45947a3bd53"
-#define APP_SECRET        "39b88368-2ed9-4d7c-8836-89593c493af0-d45ba1ad-bf43-467a-b68f-191564767cab"
-#define SWITCH_ID         "60456f2e1516f07c9023c6af"
+#define WIFI_SSID         ""    
+#define WIFI_PASS         ""
+#define APP_KEY           ""
+#define APP_SECRET        ""
+#define SWITCH_ID         ""
 #define BAUD_RATE         115200                // Change baudrate to your need
 
 #define LED_PIN   4   // GPIO for LED (inverted)
