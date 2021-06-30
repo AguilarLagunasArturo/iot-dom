@@ -1,8 +1,14 @@
 /* 
  * Descripcíon del programa
- * - Control por voz o aplicación móvil de un rele (Echo Dot y Alexa App)
+ * - Control ON/OFF de un dispositivo de potencia:
+ *    [+] Por voz               (Echo Dot)
+ *    [+] Por aplicación móvil  (Alexa App)
+ *    [+] Por Switch            (Manual)
+ *    
+ * Librerias:
  * - La libreria SinricPro facilita la comunicacion con el API de la Skill
- * - Que es de donde recibimos la señal para encender o apagar el rele
+ *   que es de donde recibimos la señal para encender o apagar el rele
+ *   
  * Documentación oficial para la libreria SinricPro
  * - https://sinricpro.github.io/esp8266-esp32-sdk
  */
@@ -13,22 +19,29 @@
 #include <SinricProSwitch.h>  // Dispositivo tipo Switch
 
 /* Constantes */
-#define WIFI_SSID     ""
-#define WIFI_PASS     ""
-#define APP_KEY       ""
-#define APP_SECRET    ""
-#define SWITCH_ID     ""
-#define BAUD_RATE     115200  // Valor por defecto para NodeMcu
+#define WIFI_SSID     "TU_MODEM"
+#define WIFI_PASS     "WIFI_PASS"
+#define APP_KEY       "APP_KEY"
+#define APP_SECRET    "APP_SECRET"
+#define SWITCH_ID     "SWITCH_ID"
+#define BAUD_RATE     115200  // Valor por defecto para NodeMCU
 
-#define LED_PIN   4   // GPIO para rele conectado al LED
+#define LED_PIN   4           // GPIO para rele que controla al FOCO
+#define SW_PIN   16           // GPIO para switch que controla al FOCO
+
+/* Variables */
+byte sw_state = 0;            // Conserva el estado actual del switch físico
+byte sw_last_state = 0;       // Conserva el ultimo estado del switch físico
+bool sw_toggle = false;       // Conserva el estado del switch digital y físico
 
 /* bool onPowerState(String deviceId, bool &state) 
  *
  * Se ejecuta al hacer un request desde el Echo Dot o la aplicación móvil
- * y recibe los siguientes parametros
- *  String deviceId
+ * y recibe los siguientes parametros:
+ * 
+ * - String deviceId
  *    contiene el id del dispositivo tipo switch
- *  bool state
+ * - bool state
  *    contiene el nuevo estado del dispositivo tipo switch (on | off)
  * 
  * return
@@ -37,8 +50,13 @@
 bool onPowerState(const String &deviceId, bool &state) {
   // mensaje que indica el nuevo estado del dispositivo
   Serial.printf("Dispositivo %s esta %s (via SinricPro) \r\n", deviceId.c_str(), state?"encendido":"apagado");
-  // asigna el nuevo estado al dispositivo
+
+  // asigna el nuevo estado al dispositivo tipo switch
   digitalWrite(LED_PIN, state?HIGH:LOW);
+
+  // se actualiza el estado del switch físico
+  sw_toggle = ! sw_toggle;
+
   return true; // request fue exitoso
 }
 
@@ -55,39 +73,58 @@ void setupWiFi() {
   }
   
   // mensaje para confirmar conexión
-  Serial.printf("conectadi.\r\n[WiFi]: IP %s\r\n", WiFi.localIP().toString().c_str());
+  Serial.printf("conectado.\r\n[WiFi]: IP %s\r\n", WiFi.localIP().toString().c_str());
 }
-
 /* Prepara a SinricPro con el dispositivo a controlar */
+// Habilita el dispositivo tipo switch en SinricPro
+SinricProSwitch& mySwitch = SinricPro[SWITCH_ID];
 void setupSinricPro() {
-  // habilita el dispositivo a SinricPro
-  SinricProSwitch& mySwitch = SinricPro[SWITCH_ID];
-
-  // asigna la funcion que maneja al dispositivo
+  // asigna la funcion que maneja el estado del dispositivo tipo switch
   mySwitch.onPowerState(onPowerState);
 
   // nos conectamos con el API de SinricPro
-  SinricPro.onConnected([](){ Serial.printf("Connected to SinricPro\r\n"); }); 
-  SinricPro.onDisconnected([](){ Serial.printf("Disconnected from SinricPro\r\n"); });
+  SinricPro.onConnected([](){ Serial.printf("Conectado a SinricPro\r\n"); }); 
+  SinricPro.onDisconnected([](){ Serial.printf("Desconectado de SinricPro\r\n"); });
   SinricPro.begin(APP_KEY, APP_SECRET);
 }
 
 /* Preparamos los pines y las conexiones necesarias */
 void setup() {
-  // se define LED_PIN como salida
-  pinMode(LED_PIN, OUTPUT);
+  pinMode(LED_PIN, OUTPUT); // se define LED_PIN como salida
+  pinMode(SW_PIN, INPUT);   // se define SW_PIN como entrada
 
-  // se define el Bauld Rate para NodeMcu
-  Serial.begin(BAUD_RATE);
+  
+  Serial.begin(BAUD_RATE);  // se define el Bauld Rate para NodeMcu
   Serial.printf("\r\n\r\n");
 
   // se establece conexion a internet y posteriormente con el API
   setupWiFi();
   setupSinricPro();
 }
-
+  
 /* Loop principal */
 void loop() {
   // se encarga de manejar los comandos de voz y solicitudes desde la app
   SinricPro.handle();
+
+  // se obtiene el estado actual del switch físico
+  sw_state = digitalRead(SW_PIN);
+
+  // si el estado del switch físico ha cambiado
+  if (sw_state != sw_last_state){
+    // se actualiza el estado del switch físico
+    sw_toggle = ! sw_toggle;
+    
+    // mensaje que indica el nuevo estado del foco
+    Serial.println("Estado del foco: " + String(sw_toggle?HIGH:LOW));
+    
+    // asigna el nuevo estado al dispositivo tipo switch
+    digitalWrite(LED_PIN, sw_toggle?HIGH:LOW);
+
+    // se actualiza el estado del dispositivo tipo switch
+    mySwitch.sendPowerStateEvent(sw_toggle);
+
+    // se actualiza el ultimo estado del switch físico
+    sw_last_state = sw_state;
+  }
 }
