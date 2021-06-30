@@ -24,10 +24,10 @@
 #define APP_KEY       "APP_KEY"
 #define APP_SECRET    "APP_SECRET"
 #define SWITCH_ID     "SWITCH_ID"
-#define BAUD_RATE     115200  // Valor por defecto para NodeMCU
 
 #define LED_PIN   4           // GPIO para rele que controla al FOCO
 #define SW_PIN   16           // GPIO para switch que controla al FOCO
+#define BAUD_RATE     115200  // Valor por defecto para NodeMCU
 
 /* Variables */
 byte sw_state = 0;            // Conserva el estado actual del switch físico
