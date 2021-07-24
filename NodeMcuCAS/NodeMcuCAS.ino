@@ -3,9 +3,9 @@
 #include <ESP8266HTTPClient.h>
 
 /* Constantes */
-#define WIFI_SSID   ""
-#define WIFI_PASS   ""
-#define URL         ""
+#define WIFI_SSID   "INFINITUM2372_2.4"
+#define WIFI_PASS   "uH0L0Ybioa"
+#define URL         "https://km83gb3bwa.execute-api.us-east-1.amazonaws.com/default/iot-skill-api"
 
 #define LED_PIN     4         // GPIO para rele que controla al dispositivo
 #define SW_PIN      16        // GPIO para switch que controla al dispositivo
