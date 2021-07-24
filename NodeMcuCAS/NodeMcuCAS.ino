@@ -5,7 +5,7 @@
 /* Constantes */
 #define WIFI_SSID   ""
 #define WIFI_PASS   ""
-#define URL         "https://km83gb3bwa.execute-api.us-east-1.amazonaws.com/default/iot-skill-api"
+#define URL         ""
 
 #define LED_PIN     4         // GPIO para rele que controla al dispositivo
 #define SW_PIN      16        // GPIO para switch que controla al dispositivo
@@ -14,8 +14,9 @@
 /* Variables */
 String toggle_state_data = "{\"action\": \"toggle-device-state\", \"device-id\": \"iot-skill-01\"}";
 String get_state_data = "{\"action\": \"get-device-state\", \"device-id\": \"iot-skill-01\"}";
+String set_device_connection = "{\"action\": \"set-device-connection\", \"device-id\": \"iot-skill-01\"}";
 String set_on_state_data = "{\"action\": \"set-device-state\", \"device-id\": \"iot-skill-01\", \"value\": \"ON\"}";
-String set_off_state_data = "{\"action\": \"set-device-state\", \"device-id\": \"iot-skill-01\", \"value\": \"OF\"}";
+String set_off_state_data = "{\"action\": \"set-device-state\", \"device-id\": \"iot-skill-01\", \"value\": \"OFF\"}";
 
 byte sw_state = 1;            // Conserva el estado actual del switch físico
 byte sw_last_state = 1;       // Conserva el ultimo estado del switch físico
@@ -55,6 +56,7 @@ void setup() {
   sw_digital_last_state = postRequest(URL, get_state_data);
   sw_last_state = digitalRead(SW_PIN);
   // DEBUG: SET PHYSICAL STATE TO LAST DIGITAL STATE AND UPDATE SW_TOGGLE
+  // DEBUG: TEST THE TOGGLE STATES WHEN DB_ITEM "ON" && "OFF"
   
   Serial.println(" Client connected");
 
@@ -70,6 +72,9 @@ void loop() {
   if (t - dt_state >= time_gap_state){
   
     sw_digital_state = postRequest(URL, get_state_data);
+    // se actualiza la ultima conexion del dispositivo
+    postRequest(URL, set_device_connection);
+    
     // Serial.println("[STATE] " + String(sw_digital_state));
 
     // si el estado del dispositivo digital ha cambiado
