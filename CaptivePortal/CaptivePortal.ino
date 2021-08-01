@@ -15,6 +15,7 @@
 #define SW_PIN          16          // GPIO para switch que controla el dispositivo
 #define BAUD_RATE       115200      // Valor por defecto para NodeMCU
 #define EEROM_SPACE     512         // Espacio en EEROM
+#define HTTPS_PORT      443         // HTTPS Port
 #define URL             "https://km83gb3bwa.execute-api.us-east-1.amazonaws.com/default/iot-skill-api"
 #define GET_STATE       "{\"action\": \"get-device-state\", \"device-id\": \"iot-skill-01\"}"
 #define SET_CONNECTION  "{\"action\": \"set-device-connection\", \"device-id\": \"iot-skill-01\"}"
@@ -84,26 +85,68 @@ String input(String argName) {
 }
 
 void login(){
-  String webpage;
-  webpage += F(
-                      ""
-                      "<!DOCTYPE html>"
+  String webpage = "";
+  webpage += F(       "<!DOCTYPE html>"
                       "<html lang='en' dir='ltr'>"
                       "  <head>"
                       "    <meta charset='utf-8'>"
                       "    <meta name='viewport' content='width=device-width'>"
                       "    <title>CaptivePortal</title>"
+                      "    <style>"
+                      "    body {"
+                      "        margin: 0;"
+                      "        padding: 0;"
+                      "        color: #F2F2F2;"
+                      "        background: #232323;"
+                      "    }"
+                      "    .container {"
+                      "        background-color: #101010;"
+                      "        position: relative;"
+                      "        transform: translateY(35%);"
+                      "        margin: auto;"
+                      "        padding: 16px;"
+                      "        width: 280px;"
+                      "        height: 225px;"
+                      "        border-radius: 0.8em;"
+                      "        text-align: center;"
+                      "    }"
+                      "    .header {"
+                      "        background-color: #101010;"
+                      "        margin: auto;"
+                      "        padding: 16px;"
+                      "        text-align: center;"
+                      "    }"
+                      "    .input {"
+                      "        margin: auto;"
+                      "        width: 240px;"
+                      "        border-radius: 4px;"
+                      "        background-color: #151515;"
+                      "        padding: 8px 0px;"
+                      "        margin-top: 15px;"
+                      "    }"
+                      "    input[type=password], input[type=text], button[type=submit], select{"
+                      "        color: #949494;"
+                      "        margin: 0;"
+                      "        background-color: #151515;"
+                      "        border: 1px solid #151515;"
+                      "        padding: 6px 0px;"
+                      "        border-radius: 3px;"
+                      "        width: 80%;"
+                      "    }"
+                      "    </style>"
                       "  </head>"
                       "  <body>"
-                      "    <form action='/save' method='post'>"
-                      "      <span>SSID: </span>"
-                      "      <select class='options' name='o'>"
+                      "    <div class='header'>"
+                      "      <h2>Login</h2>"
+                      "    </div>"
+                      "    <div class='container'>"
+                      "      <form action='/connecting' method='post'>"
+                      "        <div class='input'>"
+                      "          <select class='options' name='o'>"
   );
   
-  Serial.println("scan start");
   // WiFi.scanNetworks will return the number of networks found
   int n = WiFi.scanNetworks();
-  Serial.println("scan done");
   if (n == 0) {
     webpage += F("        <option value='0'>None</option>");
   } else {
@@ -119,16 +162,22 @@ void login(){
       delay(10);
     }
   }
-  Serial.println("");
 
   webpage += F(
-                      "      </select>"
-                      "      <br> <br>"
-                      "      <span>PASS: </span> <input type='password' name='p'> <br> <br>"
-                      "      <button type='submit' name='end'>Save</button>"
-                      "    </form>"
+                      "          </select>"
+                      "        </div>"
+                      "        <div class='input'>"
+                      "          <input type='password' placeholder='Password' name='p'>"
+                      "        </div>"
+                      "        <br> <br>"
+                      "        <div class='input'>"
+                      "          <button type='submit' name='end'>OK</button>"
+                      "        </div>"
+                      "      </form>"
+                      "    </div>"
                       "  </body>"
                       "</html>"
+                      ""
   );
 
   webServer.sendHeader("Cache-Control", "no-cache, no-store, must-revalidate");
@@ -143,25 +192,90 @@ void login(){
 void credentials(){
   ssid = input("o");
   pass = input("p");
+  Serial.print(ssid);
+  Serial.print(" : ");
+  Serial.println(pass);
   
   webServer.sendHeader("Cache-Control", "no-cache, no-store, must-revalidate");
   webServer.sendHeader("Pragma", "no-cache");
   webServer.sendHeader("Expires", "-1");
 
-  String webpage;
-  webpage += F(
-                      ""
-                      "<!DOCTYPE html>"
-                      "<html lang='en' dir='ltr'>"
-                      "  <head>"
-                      "    <meta charset='utf-8'>"
-                      "    <meta name='viewport' content='width=device-width'>"
-                      "    <title>CaptivePortal</title>"
-                      "  </head>"
-                      "  <body>"
-                      "    <span>Connecting ...</span>"
-                      "  </body>"
-                      "</html>"
+  String webpage = "";
+  webpage += F( "<!DOCTYPE html>"
+                "<html lang='en' dir='ltr'>"
+                "  <head>"
+                "    <meta charset='utf-8'>"
+                "    <meta name='viewport' content='width=device-width'>"
+                "    <title>CaptivePortal</title>"
+                "    <style>"
+                "    body {"
+                "        margin: 0;"
+                "        padding: 0;"
+                "        color: #F2F2F2;"
+                "        background: #232323;"
+                "    }"
+                "    .container {"
+                "        background-color: #101010;"
+                "        position: relative;"
+                "        transform: translateY(35%);"
+                "        margin: auto;"
+                "        padding: 16px;"
+                "        width: 280px;"
+                "        height: 225px;"
+                "        border-radius: 0.8em;"
+                "        text-align: center;"
+                "    }"
+                "    .header {"
+                "        background-color: #101010;"
+                "        margin: auto;"
+                "        padding: 16px;"
+                "        text-align: center;"
+                "    }"
+                "    .input {"
+                "        margin: auto;"
+                "        width: 240px;"
+                "        border-radius: 4px;"
+                "        background-color: #151515;"
+                "        padding: 8px 0px;"
+                "        margin-top: 15px;"
+                "    }"
+                "    input[type=password], input[type=text], button[type=submit], select{"
+                "        color: #949494;"
+                "        margin: 0;"
+                "        background-color: #151515;"
+                "        border: 1px solid #151515;"
+                "        padding: 6px 0px;"
+                "        border-radius: 3px;"
+                "        width: 80%;"
+                "    }"
+                "    </style>"
+                "  </head>"
+                "  <body>"
+                "    <div class='header'>"
+                "      <h2>Connecting ...</h2>"
+                "    </div>"
+                "    <div class='container'>"
+                "      <form action='/' method='post'>"
+                "        <div class='input'>"
+                "          <input type='text' name='o' value='"
+  );
+  webpage += ssid;
+  webpage += F( "' disabled>"
+                "        </div>"
+                "        <div class='input'>"
+                "          <input type='text' name='p' value='"
+  );
+  webpage += pass;
+  webpage += F( "' disabled>"
+                "        </div>"
+                "        <br> <br>"
+                "        <div class='input'>"
+                "          <button type='submit' name='end'>BACK</button>"
+                "        </div>"
+                "      </form>"
+                "    </div>"
+                "  </body>"
+                "</html>"
   );
 
   webServer.send(200, "text/html", webpage);
@@ -179,8 +293,8 @@ void handleAP(){
   // provided IP to all DNS request
   dnsServer.start(DNS_PORT, "*", apIP);
 
-  // replay to all requests with same HTML
-  webServer.on("/save", credentials);
+  webServer.on("/", login);
+  webServer.on("/connecting", credentials);
   webServer.onNotFound(login);
   webServer.begin();
 
@@ -198,10 +312,12 @@ void handleAP(){
         c_aux ++;
         delay(500);
         Serial.print(".");
-        if (c_aux == 50) break;
+        if (c_aux == 35) break;
       }
       
       if (WiFi.status() == WL_CONNECTED){
+        Serial.println("");
+        
         writer("1\n");
         writer(ssid + "\n", 2);
         writer(pass + "\n", ssid.length() + 3);
@@ -248,7 +364,7 @@ void setup() {
   Serial.begin(BAUD_RATE);
   EEPROM.begin(EEROM_SPACE);
 
-  // writer("0\n");
+  writer("0\n");
 
   if ( char( EEPROM.read(0) ) == '0' ){
     Serial.println("First boot -> AP");
@@ -276,7 +392,7 @@ void setup() {
   pinMode(SW_PIN, INPUT);   // se define SW_PIN como entrada
 
   clientSecure.setInsecure();
-  clientSecure.connect(URL, 443);
+  clientSecure.connect(URL, HTTPS_PORT);
 
   // actualiza el estado del dispositivo digital y físico
   sw_digital_last_state = postRequest(URL, GET_STATE);
