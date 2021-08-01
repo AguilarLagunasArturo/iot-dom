@@ -312,7 +312,7 @@ void handleAP(){
         c_aux ++;
         delay(500);
         Serial.print(".");
-        if (c_aux == 35) break;
+        if (c_aux == 30) break;
       }
       
       if (WiFi.status() == WL_CONNECTED){
