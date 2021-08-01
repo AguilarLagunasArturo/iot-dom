@@ -11,11 +11,13 @@
 #include <EEPROM.h>
 
 /* Constantes */
-#define LED_PIN         4           // GPIO para rele que controla el dispositivo
-#define SW_PIN          16          // GPIO para switch que controla el dispositivo
-#define BAUD_RATE       115200      // Valor por defecto para NodeMCU
-#define EEROM_SPACE     512         // Espacio en EEROM
-#define HTTPS_PORT      443         // HTTPS Port
+#define RESET_PIN       14           // GPIO para controlar el reset
+#define LED_PIN         4            // GPIO para rele que controla el dispositivo
+#define SW_PIN          16           // GPIO para switch que controla el dispositivo
+#define BAUD_RATE       115200       // Valor por defecto para NodeMCU
+#define EEROM_SPACE     512          // Espacio en EEROM
+#define HTTPS_PORT      443          // HTTPS Port
+#define ATTEMPS         30           // Connection attemps -> 15 seg
 #define URL             "https://km83gb3bwa.execute-api.us-east-1.amazonaws.com/default/iot-skill-api"
 #define GET_STATE       "{\"action\": \"get-device-state\", \"device-id\": \"iot-skill-01\"}"
 #define SET_CONNECTION  "{\"action\": \"set-device-connection\", \"device-id\": \"iot-skill-01\"}"
@@ -69,14 +71,31 @@ String reader(int pos = 0){
   
   while (true){
     delay(250);
-    if (addr > 510){ return "Reader failed"; }
+    
     // read
     value += char( EEPROM.read(addr) );
     // advance to the next address of the EEPROM
     addr = addr + 1;
-    if (EEPROM.read(addr) == '\n') { return value; }
+
+    if (addr >= EEROM_SPACE - 1)
+      return "Reader failed";
+    else if (EEPROM.read(addr) == '\n')
+      return value;
   }
   
+}
+
+void cleaner(){
+  // write a 0 to all 512 bytes of the EEPROM
+  for (int i = 0; i < EEROM_SPACE; i++) {
+    delay(10);
+    EEPROM.write(i, 0);
+  }
+  if (EEPROM.commit()) {
+    Serial.println("EEPROM se ha eliminado correctamente");
+  } else {
+    Serial.println("EEPROM no se ha eliminado correctamente");
+  }
 }
 
 String input(String argName) {
@@ -252,7 +271,7 @@ void credentials(){
                 "  </head>"
                 "  <body>"
                 "    <div class='header'>"
-                "      <h2>Connecting ...</h2>"
+                "      <h4>Si despues de 15 segundos no se ha conectado, intentelo de nuevo ...</h4>"
                 "    </div>"
                 "    <div class='container'>"
                 "      <form action='/' method='post'>"
@@ -284,6 +303,17 @@ void credentials(){
   saved = true;
 }
 
+void connectToWiFi(String wifi_name, String wifi_pass){
+  WiFi.begin(wifi_name, wifi_pass);
+  byte c_aux = 0;
+  while (WiFi.status() != WL_CONNECTED){
+    c_aux ++;
+    delay(500);
+    Serial.print(".");
+    if (c_aux == ATTEMPS) break;
+  }
+}
+
 void handleAP(){
   WiFi.mode(WIFI_AP);
   WiFi.softAPConfig(apIP, apIP, IPAddress(255, 255, 255, 0));
@@ -306,14 +336,7 @@ void handleAP(){
     
     if (saved){
       
-      WiFi.begin(ssid, pass);
-      byte c_aux = 0;
-      while (WiFi.status() != WL_CONNECTED){
-        c_aux ++;
-        delay(500);
-        Serial.print(".");
-        if (c_aux == 30) break;
-      }
+      connectToWiFi(ssid, pass);
       
       if (WiFi.status() == WL_CONNECTED){
         Serial.println("");
@@ -350,27 +373,30 @@ void toggleDeviceState(int id){
   // se actualiza el estado del dispositivo físico y digital
   sw_toggle = ! sw_toggle;
 
-  // mensaje que indica el nuevo estado del dispositivo
-  // Serial.println("Estado del dispositivo: " + String(sw_toggle?HIGH:LOW));
-
   // asigna el nuevo estado al dispositivo tipo switch
   digitalWrite(id, sw_toggle?HIGH:LOW);
 
   // se actualiza el estado del dispositivo tipo switch
-  sw_digital_last_state = postRequest(URL, sw_toggle?SET_ON:SET_OFF);
+  if (WiFi.status() == WL_CONNECTED)
+    sw_digital_last_state = postRequest(URL, sw_toggle?SET_ON:SET_OFF);
+  else
+    sw_digital_last_state = sw_toggle?true:false;
 }
 
 void setup() {
   Serial.begin(BAUD_RATE);
   EEPROM.begin(EEROM_SPACE);
 
-  writer("0\n");
+  pinMode(LED_PIN, OUTPUT);           // se define LED_PIN como salida
+  pinMode(SW_PIN, INPUT);             // se define SW_PIN como entrada
+  pinMode(RESET_PIN, INPUT);          // se define RESET_PIN como entrada
+  pinMode(LED_BUILTIN, OUTPUT);
+  digitalWrite(LED_BUILTIN, HIGH);
 
-  if ( char( EEPROM.read(0) ) == '0' ){
-    Serial.println("First boot -> AP");
-    handleAP();
-  }
-  else{
+  char first = char( EEPROM.read(0) );
+  //writer("0\n");
+  
+  if ( first == '1' ){
     Serial.println("Reading credentials ...");
     ssid = reader(2);
     pass = reader(ssid.length() + 3);
@@ -378,29 +404,26 @@ void setup() {
     Serial.print(" : ");
     Serial.println(pass);
     
-    WiFi.begin(ssid, pass);
-    while (WiFi.status() != WL_CONNECTED){
-      delay(500);
-      Serial.print(".");
-    }
+    connectToWiFi(ssid, pass);
+  } else {
+    Serial.println("First boot -> AP");
+    handleAP();
   }
 
   Serial.print(" Connected");
 
-  // init mani stuff
-  pinMode(LED_PIN, OUTPUT); // se define LED_PIN como salida
-  pinMode(SW_PIN, INPUT);   // se define SW_PIN como entrada
-
+  // API setup
   clientSecure.setInsecure();
   clientSecure.connect(URL, HTTPS_PORT);
 
   // actualiza el estado del dispositivo digital y físico
-  sw_digital_last_state = postRequest(URL, GET_STATE);
+  sw_digital_last_state = postRequest(URL, SET_OFF);
   sw_last_state = digitalRead(SW_PIN);
   // DEBUG: SET PHYSICAL STATE TO LAST DIGITAL STATE AND UPDATE SW_TOGGLE
   // DEBUG: TEST THE TOGGLE STATES WHEN DB_ITEM "ON" && "OFF"
   
   Serial.println(" Client connected");
+  digitalWrite(LED_BUILTIN, LOW);
 
   t = millis();
   dt_state = t;
@@ -408,9 +431,11 @@ void setup() {
 }
 
 void loop() {
+  // DEBUG: BLACKOUT -> KEEP STATES UNCHANGED
+  
   // si se exedio el time_gap checa el estado digital del dispositivo
   t = millis();
-  if (t - dt_state >= time_gap_state){
+  if ((t - dt_state >= time_gap_state) && (WiFi.status() == WL_CONNECTED)){
   
     sw_digital_state = postRequest(URL, GET_STATE);
     // se actualiza la ultima conexion del dispositivo
@@ -450,5 +475,12 @@ void loop() {
     }
 
     dt_bounce = millis();
+  }
+
+  if (digitalRead(RESET_PIN)){
+    delay(500);
+    Serial.println("RESET PRESSED");
+    cleaner();
+    ESP.reset();
   }
 }

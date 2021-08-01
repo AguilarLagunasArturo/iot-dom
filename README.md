@@ -14,7 +14,6 @@
   - Circuit
     - Micro
       - Switch + Reles
-      - Dimmer circuit
 - __Schematics__
   - Case
     - PCB

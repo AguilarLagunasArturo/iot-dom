@@ -11,8 +11,8 @@ const byte lamp[1] = {D3};    // D0, D1, D3, D4
 byte val = 0;
 int sliderVal = 0;
 
-const char* ssid     = "INFINITUM2372_2.4";
-const char* password = "uH0L0Ybioa";
+const char* ssid     = "";
+const char* password = "";
 
 //Static IP address configuration 
 // static:  192.168.1.77

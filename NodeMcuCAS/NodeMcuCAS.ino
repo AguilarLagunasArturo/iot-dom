@@ -5,8 +5,8 @@
 /* Constantes */
 #define WIFI_SSID   ""
 #define WIFI_PASS   ""
-#define URL         ""
 
+#define URL         "https://km83gb3bwa.execute-api.us-east-1.amazonaws.com/default/iot-skill-api"
 #define LED_PIN     4         // GPIO para rele que controla al dispositivo
 #define SW_PIN      16        // GPIO para switch que controla al dispositivo
 #define BAUD_RATE   115200    // Valor por defecto para NodeMCU
@@ -139,6 +139,4 @@ void toggleDeviceState(int id){
   sw_digital_last_state = postRequest(URL, sw_toggle?set_on_state_data:set_off_state_data);
   
   // mySwitch.sendPowerStateEvent(sw_toggle);
-
-  
 }
