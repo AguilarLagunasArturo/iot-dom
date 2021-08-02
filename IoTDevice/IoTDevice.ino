@@ -11,7 +11,6 @@
 #include <EEPROM.h>
 
 /* Constantes */
-#define RESET_PIN       14           // GPIO para controlar el reset
 #define LED_PIN         4            // GPIO para rele que controla el dispositivo
 #define SW_PIN          16           // GPIO para switch que controla el dispositivo
 #define BAUD_RATE       115200       // Valor por defecto para NodeMCU
@@ -390,7 +389,6 @@ void setup() {
 
   pinMode(LED_PIN, OUTPUT);           // se define LED_PIN como salida
   pinMode(SW_PIN, INPUT);             // se define SW_PIN como entrada
-  pinMode(RESET_PIN, INPUT);          // se define RESET_PIN como entrada
   pinMode(LED_BUILTIN, OUTPUT);
   digitalWrite(LED_BUILTIN, HIGH);
 
@@ -475,12 +473,5 @@ void loop() {
     }
 
     dt_bounce = millis();
-  }
-
-  if (digitalRead(RESET_PIN)){
-    delay(500);
-    Serial.println("RESET PRESIONADO");
-    cleaner();
-    ESP.reset();
   }
 }

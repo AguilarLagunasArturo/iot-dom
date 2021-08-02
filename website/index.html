@@ -1,102 +1,73 @@
-<html>
+<!DOCTYPE html>
+<html lang='en' dir='ltr'>
   <head>
     <meta charset='utf-8'>
-    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
-    <title>IoT</title>
+    <meta name='viewport' content='width=device-width'>
+    <title>CaptivePortal</title>
     <style>
-      body{
-        background-color: #323232;
-      }
-      input.switch{
-        font-size: 64px;
-        padding: 32px;
-        margin: 16px;
-        background-color: #424242;
-        width: 60%;
-        color: #ffffff;
-      }
-      input.slider{
-        width: 60%;
-      }
-      div{
-        text-align: center;
-      }
-      h1{
-        font-size: 90px;
-        color: #ffffff;
+    body {
+        margin: 0;
+        padding: 0;
+        color: #F2F2F2;
+        background: #232323;
+    }
+    .container {
+        background-color: #101010;
+        position: relative;
+        transform: translateY(35%);
         margin: auto;
-      }
-      p{
-        font-size: 32px;
-        color: white;
-      }
-      hr{
-        width: 70%;
-      }
+        padding: 16px;
+        width: 280px;
+        height: 225px;
+        border-radius: 0.8em;
+        text-align: center;
+    }
+    .header {
+        background-color: #101010;
+        margin: auto;
+        padding: 16px;
+        text-align: center;
+    }
+    .input {
+        margin: auto;
+        width: 240px;
+        border-radius: 4px;
+        background-color: #151515;
+        padding: 8px 0px;
+        margin-top: 15px;
+    }
+    input[type=password], input[type=text], button[type=submit], select{
+        color: #949494;
+        margin: 0;
+        background-color: #151515;
+        border: 1px solid #151515;
+        padding: 6px 0px;
+        border-radius: 3px;
+        width: 80%;
+    }
     </style>
   </head>
   <body>
-    <div class='toggle-secction'>
-      <h1>Switch</h1>
-      <input type='button' value='D4: OFF' class='switch' id='D4' onmousedown='sendGpio(this.id)'>
-      <hr>
+    <div class='header'>
+      <h2>Login</h2>
     </div>
-
-    <div class='slider-secction'>
-      <h1>Slider</h1>
-      <!--
-        arg:      onchange - Al modificar valor del slider ejecuta funcion
-        function: update   - Funcion escrita en Javascript, haz algo en Ajax
-                             para enviar el valor del slider a Nodemcu
-      -->
-      <input type='range' class='slider' id='pwmIn' value='0' min='0' max='255'>
-      <p>Value: <span id='pwmInText'></span></p>
-      <script type='text/javascript'>
-        gpioState = false;
-        var slider = document.getElementById('pwmIn');
-        var sliderText = document.getElementById('pwmInText');
-        var gpio = document.getElementById('D4');
-        sliderText.innerHTML = slider.value;
-
-        $.ajaxSetup({timeout:1000});
-
-        function sendGpio(id){
-          gpioState = !gpioState;
-          if (gpioState){
-            $.get('/?gpio=1&');
-            gpio.value = id + ': ON';
-          } else{
-            $.get('/?gpio=0&');
-            gpio.value = id + ': OFF';
-          }
-        }
-        slider.oninput = function(){
-          sliderText.innerHTML = slider.value;
-          $.get('/?value='+slider.value+'&');
-          {Connection: close};
-        }
-      </script>
-      <!--
-        function send() {
-          $.get('/?value='+slider.value+'&');
-          {Connection: close};
-        }
-        window.setInterval(function(){
-          console.log('Sending '+slider.value+' ...');
-        }, 2000);
-
-        Ajax is a set of web development techniques using many web technologies on
-        the client side to create asynchronous web applications. With Ajax, web
-        applications can send and retrieve data from a server asynchronously
-        without interfering with the display and behavior of the existing page.
-
-        https://developers.google.com/speed/libraries
-
-        https://www.w3schools.com/jsref/met_win_setinterval.asp
-
-        https://stackoverflow.com/questions/2170923/whats-the-easiest-way-to-call-a-function-every-5-seconds-in-jquery
-      -->
-      <hr>
+    <div class='container'>
+      <form action='/home/aal/Github/iot-dom/wifi_credentials/save.html' method='post'>
+        <div class='input'>
+          <select class='options' name='o'>
+            <option value='1'>Uno</option>
+            <option value='2'>Dos</option>
+            <option value='3'>Tres</option>
+          </select>
+        </div>
+        <div class='input'>
+          <input type='password' placeholder='Password' name='p'>
+        </div>
+        <br> <br>
+        <div class='input'>
+          <button type='submit' name='end'>OK</button>
+        </div>
+      </form>
     </div>
   </body>
 </html>
