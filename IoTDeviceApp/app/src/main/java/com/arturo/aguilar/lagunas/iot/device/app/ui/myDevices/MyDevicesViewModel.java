@@ -1,16 +1,16 @@
-package com.arturo.aguilar.lagunas.iot.device.app.ui.slideshow;
+package com.arturo.aguilar.lagunas.iot.device.app.ui.myDevices;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class SlideshowViewModel extends ViewModel {
+public class MyDevicesViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public SlideshowViewModel() {
+    public MyDevicesViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is slideshow fragment");
+        mText.setValue("Show my devices");
     }
 
     public LiveData<String> getText() {

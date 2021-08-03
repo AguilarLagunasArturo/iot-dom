@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.arturo.aguilar.lagunas.iot.device.app.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        android:name="com.arturo.aguilar.lagunas.iot.device.app.ui.myDevices.MyDevicesFragment"
+        android:label="@string/menu_add_device"
+        tools:layout="@layout/fragment_my_devices" />
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.arturo.aguilar.lagunas.iot.device.app.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:name="com.arturo.aguilar.lagunas.iot.device.app.ui.addDevice.AddDeviceFragment"
+        android:label="@string/menu_my_devices"
+        tools:layout="@layout/fragment_add_device" />
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="com.arturo.aguilar.lagunas.iot.device.app.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:name="com.arturo.aguilar.lagunas.iot.device.app.ui.settings.SettingsFragment"
+        android:label="@string/menu_settings"
+        tools:layout="@layout/fragment_settings" />
 </navigation>

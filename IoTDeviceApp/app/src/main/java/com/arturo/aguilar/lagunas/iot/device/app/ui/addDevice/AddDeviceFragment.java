@@ -1,4 +1,4 @@
-package com.arturo.aguilar.lagunas.iot.device.app.ui.gallery;
+package com.arturo.aguilar.lagunas.iot.device.app.ui.addDevice;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,24 +12,23 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.arturo.aguilar.lagunas.iot.device.app.R;
-import com.arturo.aguilar.lagunas.iot.device.app.databinding.FragmentGalleryBinding;
+import com.arturo.aguilar.lagunas.iot.device.app.databinding.FragmentAddDeviceBinding;
 
-public class GalleryFragment extends Fragment {
+public class AddDeviceFragment extends Fragment {
 
-    private GalleryViewModel galleryViewModel;
-    private FragmentGalleryBinding binding;
+    private AddDeviceViewModel addDeviceViewModel;
+    private FragmentAddDeviceBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        galleryViewModel =
-                new ViewModelProvider(this).get(GalleryViewModel.class);
+        addDeviceViewModel =
+                new ViewModelProvider(this).get(AddDeviceViewModel.class);
 
-        binding = FragmentGalleryBinding.inflate(inflater, container, false);
+        binding = FragmentAddDeviceBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textGallery;
-        galleryViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        addDeviceViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
