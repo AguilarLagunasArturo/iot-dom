@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rl_title">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:padding="5dp"
+
+            android:textSize="24sp"
+            android:textColor="?android:attr/textColorPrimary"
+            android:text="Some title"
+
+            android:id="@+id/text_title"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_below="@+id/rl_title"
+        android:id="@+id/rl_body">
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+
+            android:src="@drawable/ic_launcher_foreground"
+            android:id="@+id/list_image"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/list_image"
+            android:layout_toEndOf="@+id/list_image"
+            android:padding="10dp"
+
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:textColor="?android:attr/textColorSecondary"
+            android:text="A description"
+
+            android:id="@+id/text_description" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

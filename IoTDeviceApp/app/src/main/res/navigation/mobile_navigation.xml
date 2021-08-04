@@ -3,22 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@id/nav_add_device">
 
     <fragment
-        android:id="@+id/nav_home"
+        android:id="@+id/nav_my_devices"
         android:name="com.arturo.aguilar.lagunas.iot.device.app.ui.myDevices.MyDevicesFragment"
-        android:label="@string/menu_add_device"
+        android:label="@string/menu_my_devices"
         tools:layout="@layout/fragment_my_devices" />
 
     <fragment
-        android:id="@+id/nav_gallery"
+        android:id="@+id/nav_add_device"
         android:name="com.arturo.aguilar.lagunas.iot.device.app.ui.addDevice.AddDeviceFragment"
-        android:label="@string/menu_my_devices"
+        android:label="@string/menu_add_device"
         tools:layout="@layout/fragment_add_device" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
+        android:id="@+id/nav_settings"
         android:name="com.arturo.aguilar.lagunas.iot.device.app.ui.settings.SettingsFragment"
         android:label="@string/menu_settings"
         tools:layout="@layout/fragment_settings" />

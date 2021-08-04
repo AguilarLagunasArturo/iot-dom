@@ -16,24 +16,14 @@ import com.arturo.aguilar.lagunas.iot.device.app.databinding.FragmentMyDevicesBi
 
 public class MyDevicesFragment extends Fragment {
 
-    private MyDevicesViewModel myDevicesViewModel;
     private FragmentMyDevicesBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        myDevicesViewModel =
-                new ViewModelProvider(this).get(MyDevicesViewModel.class);
 
         binding = FragmentMyDevicesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textHome;
-        myDevicesViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
         return root;
     }
 
