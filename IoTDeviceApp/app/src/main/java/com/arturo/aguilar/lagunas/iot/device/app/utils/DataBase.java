@@ -5,15 +5,18 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 public class DataBase {
-    private static final String TAG = "DataBase";
+    private static final String TAG = "DEBUG DB";
 
-    private SQLiteDatabase db = null;
-    private Cursor cursor = null;
+    private SQLiteDatabase db;
+    private Cursor cursor;
     private Context application;
-    private String dbName = "IoTDevice.db";
+    private String dbName;
 
-    DataBase(Context context){
+    public DataBase(Context context){
         application = context;
+        dbName = "iot.db";
+        cursor = null;
+        db = null;
     }
 
     public void setupDB(){
@@ -35,10 +38,10 @@ public class DataBase {
             Log.d(TAG, "Brand new db");
             db = application.openOrCreateDatabase(dbName, application.MODE_PRIVATE, null);
 
-            // Setup [Global settings]
-            // db.execSQL("create table if not exists global (id integer primary key, item text, is_on integer);");
-            //db.execSQL("insert into global (id, item, is_on) values (1, 'pin_enabled_digital', 1);");
-            // db.execSQL("insert into global (id, item, is_on) values (2, 'analog_view', 1);");
+            // Setup [Devices settings]
+            db.execSQL("create table if not exists devices (id integer primary key, uuid int, name text, description text, type text, state integer);");
+            db.execSQL("insert into devices (id, uuid, name, description, type, state) values (1, 0, 'Some IoT Switch', 'Device description', 'Type', 0);");
+            db.execSQL("insert into devices (id, uuid, name, description, type, state) values (2, 1, 'Some IoT Switch', 'Device description', 'Type', 0);");
         }
     }
 

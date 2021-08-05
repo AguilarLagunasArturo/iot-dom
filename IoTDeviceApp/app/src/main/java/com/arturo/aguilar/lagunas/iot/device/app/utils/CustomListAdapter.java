@@ -9,36 +9,38 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class CustomListAdapter extends BaseAdapter{
 
-    private static final String TAG = "CustomListAdapter";
+    private static final String TAG = "DEBUG CustomListAdapter";
 
-    private int[] drawable_id;
-    private String[] title;
-    private String[] description;
+    private ArrayList<Integer> drawable_id;
+    private ArrayList<String> title;
+    private ArrayList<String> description;
     private LayoutInflater inflater;
     private int layout;
     private boolean image;
 
     // Custom adapter for arrays
-    public CustomListAdapter(int[] i, String[] t, String[] d, LayoutInflater l, int xml){
+    public CustomListAdapter(ArrayList<Integer> i, ArrayList<String> t, ArrayList<String> d, LayoutInflater l, int xml){
         drawable_id = i;
         title = t;
         description = d;
         inflater = l;
         layout = xml;
-        if ((i.length == t.length) && (t.length == d.length))
+        if ((i.size() == t.size()) && (t.size() == d.size()))
             Log.d(TAG, "Same sizes.");
         else
             Log.d(TAG, "Different sizes.");
         image = true;
     }
-    public CustomListAdapter(String[] t, String[] d, LayoutInflater l, int xml){
+    public CustomListAdapter(ArrayList<String> t, ArrayList<String> d, LayoutInflater l, int xml){
         title = t;
         description = d;
         inflater = l;
         layout = xml;
-        if (t.length == d.length)
+        if (t.size() == d.size())
             Log.d(TAG, "Same sizes.");
         else
             Log.d(TAG, "Different sizes.");
@@ -47,7 +49,7 @@ public class CustomListAdapter extends BaseAdapter{
 
     @Override
     public int getCount() {
-        return title.length;
+        return title.size();
     }
 
     @Override
@@ -66,14 +68,14 @@ public class CustomListAdapter extends BaseAdapter{
 
         if (image){
             ImageView list_image = (ImageView) view.findViewById(R.id.list_image);
-            list_image.setImageResource(drawable_id[position]);
+            list_image.setImageResource(drawable_id.get(position));
         }
 
         TextView text_title = (TextView) view.findViewById(R.id.text_title);
         TextView text_description = (TextView) view.findViewById(R.id.text_description);
 
-        text_title.setText(title[position]);
-        text_description.setText(description[position]);
+        text_title.setText(title.get(position));
+        text_description.setText(description.get(position));
 
         return view;
     }
