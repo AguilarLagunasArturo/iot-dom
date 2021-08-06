@@ -22,4 +22,13 @@
     <string name="wifi_enable_error">Cannot enable WiFi</string>
     <string name="wifi_not_found">There is no WiFi Networks available</string>
 
+    <string name="state_on">ON</string>
+    <string name="state_off">OFF</string>
+    <string name="state_sending">SENDING</string>
+    <string name="state_unknown">UNKNOWN</string>
+    <string name="state_loading">LOADING</string>
+
+    <string name="toast_device_unavailable">Device unavailable</string>
+    <string name="toast_error">An error occurred</string>
+
 </resources>

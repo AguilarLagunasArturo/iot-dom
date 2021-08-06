@@ -39,9 +39,9 @@ public class DataBase {
             db = application.openOrCreateDatabase(dbName, application.MODE_PRIVATE, null);
 
             // Setup [Devices settings]
-            db.execSQL("create table if not exists devices (id integer primary key, uuid int, name text, description text, type text, state integer);");
-            db.execSQL("insert into devices (id, uuid, name, description, type, state) values (1, 0, 'Some IoT Switch', 'Device description', 'Type', 0);");
-            db.execSQL("insert into devices (id, uuid, name, description, type, state) values (2, 1, 'Some IoT Switch', 'Device description', 'Type', 0);");
+            db.execSQL("create table if not exists devices (id integer primary key, uuid integer, name text, description text, type text);");
+            db.execSQL("insert into devices (id, uuid, name, description, type) values (1, 0, 'Some IoT Device', 'Device description', 'Switch');");
+            db.execSQL("insert into devices (id, uuid, name, description, type) values (2, 1, 'Some IoT Device', 'Device description', 'Switch');");
         }
     }
 
