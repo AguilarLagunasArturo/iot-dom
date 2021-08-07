@@ -11,18 +11,70 @@
 #include <EEPROM.h>
 
 /* Constantes */
-#define RESET_PIN       14           // GPIO para controlar el reset
-#define LED_PIN         4            // GPIO para rele que controla el dispositivo
-#define SW_PIN          16           // GPIO para switch que controla el dispositivo
-#define BAUD_RATE       115200       // Valor por defecto para NodeMCU
-#define EEROM_SPACE     512          // Espacio en EEROM
-#define HTTPS_PORT      443          // HTTPS Port
-#define ATTEMPS         30           // Connection attemps -> 15 seg
+const String UUID =     "iot-skill-01";     // Identificador unico del dispositivo
+#define TYPE            "SWITCH"            // Identificador para el tipo de dispositivo
+#define AP_TITLE        "SS2021 - LOGGER"   // Identificador para el tipo de dispositivo
+#define RESET_PIN       14                  // GPIO para controlar el reset
+#define LED_PIN         4                   // GPIO para rele que controla el dispositivo
+#define SW_PIN          16                  // GPIO para switch que controla el dispositivo
+#define BAUD_RATE       115200              // Valor por defecto para NodeMCU
+#define EEROM_SPACE     512                 // Espacio en EEROM para NodeMCU
+#define HTTPS_PORT      443                 // HTTPS Port
+#define ATTEMPS         30                  // Connection attemps -> 15 seg
 #define URL             "https://km83gb3bwa.execute-api.us-east-1.amazonaws.com/default/iot-skill-api"
-#define GET_STATE       "{\"action\": \"get-device-state\", \"device-id\": \"iot-skill-01\"}"
-#define SET_CONNECTION  "{\"action\": \"set-device-connection\", \"device-id\": \"iot-skill-01\"}"
-#define SET_ON          "{\"action\": \"set-device-state\", \"device-id\": \"iot-skill-01\", \"value\": \"ON\"}"
-#define SET_OFF         "{\"action\": \"set-device-state\", \"device-id\": \"iot-skill-01\", \"value\": \"OFF\"}"
+#define GET_STATE       "{\"action\": \"get-device-state\", \"device-id\": \"" + UUID + "\"}"
+#define SET_CONNECTION  "{\"action\": \"set-device-connection\", \"device-id\": \"" + UUID + "\"}"
+#define SET_ON          "{\"action\": \"set-device-state\", \"device-id\": \"" + UUID + "\", \"value\": \"ON\"}"
+#define SET_OFF         "{\"action\": \"set-device-state\", \"device-id\": \"" + UUID + "\", \"value\": \"OFF\"}"
+const String STYLE =    "    <style>"
+                        "    html{"
+                        "        display: table;"
+                        "        position: absolute;"
+                        "        top: 0;"
+                        "        left: 0;"
+                        "        height: 100%;"
+                        "        width: 100%;"
+                        "    }"
+                        "    body {"
+                        "        display: table-cell;"
+                        "        vertical-align: middle;"
+                        "        margin: 0;"
+                        "        padding: 0;"
+                        "        color: #F2F2F2;"
+                        "        background: #232323;"
+                        "    }"
+                        "    .container {"
+                        "        background-color: #101010;"
+                        "        margin: auto;"
+                        "        padding: 16px;"
+                        "        width: 280px;"
+                        "        border-radius: 0.8em;"
+                        "        text-align: center;"
+                        "    }"
+                        "    .input {"
+                        "        margin: auto;"
+                        "        width: 240px;"
+                        "        border-radius: 4px;"
+                        "        background-color: #151515;"
+                        "        margin-top: 15px;"
+                        "        margin-bottom: 15px;"
+                        "    }"
+                        "    input[type=password], input[type=text], button[type=submit], select{"
+                        "        color: #949494;"
+                        "        margin: 0;"
+                        "        background-color: #151515;"
+                        "        border: 1px solid #151515;"
+                        "        padding: 8px 0px;"
+                        "        border-radius: 3px;"
+                        "        width: 80%;"
+                        "    }"
+                        "    button[type=submit]{"
+                        "        width: 100%;"
+                        "    }"
+                        "    button[type=submit]:active {"
+                        "        background-color: gray;"
+                        "    }"
+                        "    </style>";
 
 /* Variables */
 bool sw_state = true;                // Conserva el estado actual del switch físico
@@ -105,64 +157,20 @@ String input(String argName) {
 
 void login(){
   String webpage = "";
-  webpage += F(       "<!DOCTYPE html>"
-                      "<html lang='en' dir='ltr'>"
-                      "  <head>"
-                      "    <meta charset='utf-8'>"
-                      "    <meta name='viewport' content='width=device-width'>"
-                      "    <title>CaptivePortal</title>"
-                      "    <style>"
-                      "    body {"
-                      "        margin: 0;"
-                      "        padding: 0;"
-                      "        color: #F2F2F2;"
-                      "        background: #232323;"
-                      "    }"
-                      "    .container {"
-                      "        background-color: #101010;"
-                      "        position: relative;"
-                      "        transform: translateY(35%);"
-                      "        margin: auto;"
-                      "        padding: 16px;"
-                      "        width: 280px;"
-                      "        height: 225px;"
-                      "        border-radius: 0.8em;"
-                      "        text-align: center;"
-                      "    }"
-                      "    .header {"
-                      "        background-color: #101010;"
-                      "        margin: auto;"
-                      "        padding: 16px;"
-                      "        text-align: center;"
-                      "    }"
-                      "    .input {"
-                      "        margin: auto;"
-                      "        width: 240px;"
-                      "        border-radius: 4px;"
-                      "        background-color: #151515;"
-                      "        padding: 8px 0px;"
-                      "        margin-top: 15px;"
-                      "    }"
-                      "    input[type=password], input[type=text], button[type=submit], select{"
-                      "        color: #949494;"
-                      "        margin: 0;"
-                      "        background-color: #151515;"
-                      "        border: 1px solid #151515;"
-                      "        padding: 6px 0px;"
-                      "        border-radius: 3px;"
-                      "        width: 80%;"
-                      "    }"
-                      "    </style>"
-                      "  </head>"
-                      "  <body>"
-                      "    <div class='header'>"
-                      "      <h2>Login</h2>"
-                      "    </div>"
-                      "    <div class='container'>"
-                      "      <form action='/connecting' method='post'>"
-                      "        <div class='input'>"
-                      "          <select class='options' name='o'>"
-  );
+  webpage += F( "<!DOCTYPE html>"
+                "<html lang='en' dir='ltr'>"
+                "  <head>"
+                "    <meta charset='utf-8'>"
+                "    <meta name='viewport' content='width=device-width'>"
+                "    <title>CaptivePortal</title>");
+  webpage += STYLE;
+  webpage += F( "  </head>"
+                "  <body>"
+                "    <div class='container'>"
+                "      <h3>Login</h3> <br>"
+                "      <form action='/connecting' method='post'>"
+                "        <div class='input'>"
+                "          <select class='options' name='o'>");
   
   // WiFi.scanNetworks will return the number of networks found
   int n = WiFi.scanNetworks();
@@ -182,22 +190,19 @@ void login(){
     }
   }
 
-  webpage += F(
-                      "          </select>"
-                      "        </div>"
-                      "        <div class='input'>"
-                      "          <input type='password' placeholder='Password' name='p'>"
-                      "        </div>"
-                      "        <br> <br>"
-                      "        <div class='input'>"
-                      "          <button type='submit' name='end'>OK</button>"
-                      "        </div>"
-                      "      </form>"
-                      "    </div>"
-                      "  </body>"
-                      "</html>"
-                      ""
-  );
+  webpage += F( "          </select>"
+                "        </div>"
+                "        <div class='input'>"
+                "          <input type='password' placeholder='Password' name='p'>"
+                "        </div>"
+                "        <br>"
+                "        <div class='input'>"
+                "          <button type='submit' name='end'>OK</button>"
+                "        </div>"
+                "      </form>"
+                "    </div>"
+                "  </body>"
+                "</html>");
 
   webServer.sendHeader("Cache-Control", "no-cache, no-store, must-revalidate");
   webServer.sendHeader("Pragma", "no-cache");
@@ -225,77 +230,55 @@ void credentials(){
                 "  <head>"
                 "    <meta charset='utf-8'>"
                 "    <meta name='viewport' content='width=device-width'>"
-                "    <title>CaptivePortal</title>"
-                "    <style>"
-                "    body {"
-                "        margin: 0;"
-                "        padding: 0;"
-                "        color: #F2F2F2;"
-                "        background: #232323;"
-                "    }"
-                "    .container {"
-                "        background-color: #101010;"
-                "        position: relative;"
-                "        transform: translateY(35%);"
-                "        margin: auto;"
-                "        padding: 16px;"
-                "        width: 280px;"
-                "        height: 225px;"
-                "        border-radius: 0.8em;"
-                "        text-align: center;"
-                "    }"
-                "    .header {"
-                "        background-color: #101010;"
-                "        margin: auto;"
-                "        padding: 16px;"
-                "        text-align: center;"
-                "    }"
-                "    .input {"
-                "        margin: auto;"
-                "        width: 240px;"
-                "        border-radius: 4px;"
-                "        background-color: #151515;"
-                "        padding: 8px 0px;"
-                "        margin-top: 15px;"
-                "    }"
-                "    input[type=password], input[type=text], button[type=submit], select{"
-                "        color: #949494;"
-                "        margin: 0;"
-                "        background-color: #151515;"
-                "        border: 1px solid #151515;"
-                "        padding: 6px 0px;"
-                "        border-radius: 3px;"
-                "        width: 80%;"
-                "    }"
-                "    </style>"
+                "    <title>CaptivePortal</title>");
+  webpage += STYLE;
+  webpage += F( "    <script type='text/javascript'>"
+                "        var seconds = 30;"
+                "        var countdown = setInterval(function() {"
+                "          seconds--;"
+                "          if (seconds <= 0) {"
+                "            document.getElementById('header').textContent = 'Error, favor de ingresar las credenciales de nuevo';"
+                "            document.getElementById('button').textContent = 'ATRAS';"
+                "            document.getElementById('button').disabled = false;"
+                "            clearInterval(countdown);"
+                "          }else {"
+                "            document.getElementById('countdown').textContent = seconds;"
+                "          };"
+                "        }, 1000);"
+                "    </script>"
                 "  </head>"
                 "  <body>"
-                "    <div class='header'>"
-                "      <h4>Si despues de 15 segundos no se ha conectado, intentelo de nuevo ...</h4>"
-                "    </div>"
                 "    <div class='container'>"
+                "      <h4 id='header'>Conectando dispositivo <span id='countdown'>30</span></h4> <br>"
                 "      <form action='/' method='post'>"
                 "        <div class='input'>"
-                "          <input type='text' name='o' value='"
-  );
+                "          <input type='text' name='o' value='");
   webpage += ssid;
   webpage += F( "' disabled>"
                 "        </div>"
                 "        <div class='input'>"
-                "          <input type='text' name='p' value='"
-  );
+                "          <input type='text' name='p' value='");
   webpage += pass;
   webpage += F( "' disabled>"
                 "        </div>"
-                "        <br> <br>"
                 "        <div class='input'>"
-                "          <button type='submit' name='end'>BACK</button>"
+                "          <input type='text' name='uuid' value='");
+  webpage += UUID;
+  webpage += F( "' disabled>"
+                "        </div>"
+                "        <div class='input'>"
+                "          <input type='text' name='type' value='");
+  webpage += TYPE;
+  webpage += F( "' disabled>"
+                "        </div>"
+                "        <br>"
+                "        <div class='input'>"
+                "          <button id='button' type='submit' name='end' disabled>...</button>"
                 "        </div>"
                 "      </form>"
                 "    </div>"
                 "  </body>"
-                "</html>"
-  );
+                "</html>");
 
   webServer.send(200, "text/html", webpage);
   webServer.client().stop(); // Stop is needed because we sent no content length
@@ -317,7 +300,7 @@ void connectToWiFi(String wifi_name, String wifi_pass){
 void handleAP(){
   WiFi.mode(WIFI_AP);
   WiFi.softAPConfig(apIP, apIP, IPAddress(255, 255, 255, 0));
-  WiFi.softAP("SS2021 - Logger");
+  WiFi.softAP(AP_TITLE);
 
   // if DNSServer is started with "*" for domain name, it will reply with
   // provided IP to all DNS request

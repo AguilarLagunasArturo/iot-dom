@@ -5,7 +5,17 @@
     <meta name='viewport' content='width=device-width'>
     <title>CaptivePortal</title>
     <style>
+    html{
+        display: table;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+    }
     body {
+        display: table-cell;
+        vertical-align: middle;
         margin: 0;
         padding: 0;
         color: #F2F2F2;
@@ -13,19 +23,10 @@
     }
     .container {
         background-color: #101010;
-        position: relative;
-        transform: translateY(35%);
         margin: auto;
         padding: 16px;
         width: 280px;
-        height: 225px;
         border-radius: 0.8em;
-        text-align: center;
-    }
-    .header {
-        background-color: #101010;
-        margin: auto;
-        padding: 16px;
         text-align: center;
     }
     .input {
@@ -33,25 +34,28 @@
         width: 240px;
         border-radius: 4px;
         background-color: #151515;
-        padding: 8px 0px;
         margin-top: 15px;
+        margin-bottom: 15px;
     }
     input[type=password], input[type=text], button[type=submit], select{
         color: #949494;
-        margin: 0;
         background-color: #151515;
         border: 1px solid #151515;
-        padding: 6px 0px;
+        padding: 8px 0px;
         border-radius: 3px;
         width: 80%;
+    }
+    button[type=submit]{
+        width: 100%;
+    }
+    button[type=submit]:active {
+        background-color: gray;
     }
     </style>
   </head>
   <body>
-    <div class='header'>
-      <h2>Login</h2>
-    </div>
     <div class='container'>
+      <h3>Login</h3> <br>
       <form action='/home/aal/Github/iot-dom/wifi_credentials/save.html' method='post'>
         <div class='input'>
           <select class='options' name='o'>
