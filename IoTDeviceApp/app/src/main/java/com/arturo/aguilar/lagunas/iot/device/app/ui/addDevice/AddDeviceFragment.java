@@ -1,7 +1,6 @@
 package com.arturo.aguilar.lagunas.iot.device.app.ui.addDevice;
 
 import android.annotation.SuppressLint;
-import android.app.FragmentTransaction;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -24,8 +23,6 @@ import androidx.fragment.app.Fragment;
 import com.arturo.aguilar.lagunas.iot.device.app.MainActivity;
 import com.arturo.aguilar.lagunas.iot.device.app.R;
 import com.arturo.aguilar.lagunas.iot.device.app.databinding.FragmentAddDeviceBinding;
-import com.arturo.aguilar.lagunas.iot.device.app.ui.myDevices.MyDevicesFragment;
-import com.arturo.aguilar.lagunas.iot.device.app.ui.settings.SettingsFragment;
 import com.arturo.aguilar.lagunas.iot.device.app.utils.CustomListAdapter;
 
 import java.util.ArrayList;
@@ -45,7 +42,8 @@ public class AddDeviceFragment extends Fragment {
     private ArrayList<String> bssids = new ArrayList<String>();
 
     private FragmentAddDeviceBinding binding;
-    private String TAG = "DEBUG ADD DEVICE";
+    private final String TAG = "DEBUG ADD DEVICE";
+    private final String AP_ID = "SS2021 - LOGGER";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -77,9 +75,13 @@ public class AddDeviceFragment extends Fragment {
         lvWiFi.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getActivity(), wifiList.get(i).SSID, Toast.LENGTH_SHORT).show();
-                connectToWifi(wifiList.get(i).SSID);
-                MainActivity.navController.navigate(R.id.nav_my_devices);
+                if (wifiList.get(i).SSID.equals(AP_ID)){
+                    Toast.makeText(getActivity(), String.format("%s : %s", R.string.toast_waiting_for_device, wifiList.get(i).SSID), Toast.LENGTH_LONG).show();
+                    connectToWifi(wifiList.get(i).SSID);
+                    MainActivity.navController.navigate(R.id.nav_my_devices);
+                }else{
+                    Toast.makeText(getActivity(), R.string.toast_not_a_device, Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

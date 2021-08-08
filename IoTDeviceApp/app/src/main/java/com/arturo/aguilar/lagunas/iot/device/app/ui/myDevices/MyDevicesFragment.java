@@ -31,6 +31,7 @@ public class MyDevicesFragment extends Fragment {
     private CustomListAdapter customDeviceList;
     private ArrayList<String> titles = new ArrayList<String>();
     private ArrayList<String> descriptions = new ArrayList<String>();
+    private ArrayList<Integer> icons = new ArrayList<Integer>();
     private Cursor cursor;
 
     private String TAG = "DEBUG MyDevices";
@@ -48,20 +49,27 @@ public class MyDevicesFragment extends Fragment {
 
         for (int i = 0; i < cursor.getCount(); i++){
             String uuid = cursor.getString(1);
-            String name = cursor.getString(2);
-            String description = cursor.getString(3);
+            String type = cursor.getString(4);
 
             Log.d(TAG, String.format("UUID: %s", uuid));
-            Log.d(TAG, String.format("NAME: %s", name));
-            Log.d(TAG, String.format("DESC: %s", description));
+            Log.d(TAG, String.format("TYPE: %s", type));
 
-            titles.add(String.format("%s : %s", uuid, name));
-            descriptions.add(description);
+            titles.add(uuid);
+            descriptions.add(type);
+
+            switch (type) {
+                case "SWITCH":
+                    icons.add(R.drawable.digital_pressed);
+                    break;
+                default:
+                    icons.add(R.drawable.ic_launcher_foreground);
+                    break;
+            }
 
             cursor.moveToNext();
         }
 
-        customDeviceList = new CustomListAdapter(titles, descriptions, getLayoutInflater(), R.layout.list_devices);
+        customDeviceList = new CustomListAdapter(icons, titles, descriptions, getLayoutInflater(), R.layout.list_devices);
         lvDevices.setAdapter(customDeviceList);
 
         lvDevices.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -69,7 +77,7 @@ public class MyDevicesFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(getActivity(), titles.get(i), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getActivity(), DeviceSwitchActivity.class);
-                intent.putExtra("Device", titles.get(i));
+                intent.putExtra("uuid", titles.get(i));
                 startActivity(intent);
             }
         });
@@ -79,6 +87,10 @@ public class MyDevicesFragment extends Fragment {
 
     @Override
     public void onDestroyView() {
+        icons.clear();
+        titles.clear();
+        descriptions.clear();
+        customDeviceList.notifyDataSetChanged();
         super.onDestroyView();
         binding = null;
     }

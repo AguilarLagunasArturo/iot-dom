@@ -1,27 +1,23 @@
-package com.arturo.aguilar.lagunas.iot.device.app.ui.settings;
+package com.arturo.aguilar.lagunas.iot.device.app.ui.about;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
-import com.arturo.aguilar.lagunas.iot.device.app.databinding.FragmentSettingsBinding;
+import com.arturo.aguilar.lagunas.iot.device.app.databinding.FragmentAboutBinding;
 
-public class SettingsFragment extends Fragment {
+public class AboutFragment extends Fragment {
 
-    private FragmentSettingsBinding binding;
+    private FragmentAboutBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        binding = FragmentSettingsBinding.inflate(inflater, container, false);
+        binding = FragmentAboutBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         return root;

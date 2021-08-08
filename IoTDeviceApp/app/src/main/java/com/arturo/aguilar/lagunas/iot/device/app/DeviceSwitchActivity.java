@@ -52,9 +52,8 @@ public class DeviceSwitchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_device_switch);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        // DEBUG GET DEVICE UUID
-        setTitle( getIntent().getStringExtra("Device") );
-        deviceUUID = "iot-skill-01";
+        deviceUUID = getIntent().getStringExtra("uuid");
+        setTitle( deviceUUID );
 
         ivButton = (ImageView) findViewById(R.id.iv_toggle);
         tvOutput = (TextView) findViewById(R.id.tv_output);

@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/nav_settings"
-        android:name="com.arturo.aguilar.lagunas.iot.device.app.ui.settings.SettingsFragment"
-        android:label="@string/menu_settings"
-        tools:layout="@layout/fragment_settings" />
+        android:name="com.arturo.aguilar.lagunas.iot.device.app.ui.about.AboutFragment"
+        android:label="@string/menu_about"
+        tools:layout="@layout/fragment_about" />
 </navigation>

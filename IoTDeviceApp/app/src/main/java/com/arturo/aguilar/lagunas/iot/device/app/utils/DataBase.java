@@ -37,11 +37,9 @@ public class DataBase {
         else {
             Log.d(TAG, "Brand new db");
             db = application.openOrCreateDatabase(dbName, application.MODE_PRIVATE, null);
-
             // Setup [Devices settings]
-            db.execSQL("create table if not exists devices (id integer primary key, uuid integer, name text, description text, type text);");
-            db.execSQL("insert into devices (id, uuid, name, description, type) values (1, 0, 'Some IoT Device', 'Device description', 'Switch');");
-            db.execSQL("insert into devices (id, uuid, name, description, type) values (2, 1, 'Some IoT Device', 'Device description', 'Switch');");
+            db.execSQL("create table if not exists devices (id integer primary key, uuid text, name text, description text, type text);");
+            // db.execSQL("insert into devices (id, uuid, name, description, type) values (1, 0, 'Some IoT Device', 'Device description', 'Switch');");
         }
     }
 
@@ -73,6 +71,8 @@ public class DataBase {
         db.execSQL(command);
         logTable(table);
     }
+
+    public void execCommand(String command){ db.execSQL(command); }
 
     public Cursor query(String query){
         return db.rawQuery(query, null);

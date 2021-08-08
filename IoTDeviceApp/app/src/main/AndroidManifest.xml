@@ -17,7 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IoTDeviceApp">
         <activity
-            android:name=".AccessPointHandlerActivity">
+            android:name=".AccessPointHandlerActivity"
+            android:label="@string/access_point">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <data android:scheme="http" android:host="*"/>
