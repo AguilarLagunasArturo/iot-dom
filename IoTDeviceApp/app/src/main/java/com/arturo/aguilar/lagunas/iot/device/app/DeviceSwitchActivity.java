@@ -47,6 +47,11 @@ public class DeviceSwitchActivity extends AppCompatActivity {
     private Handler handler;
     private Runnable runnable;
 
+    private int ic_unavailable = R.drawable.ic_power_waiting;
+    private int ic_on = R.drawable.ic_power_on;
+    private int ic_off = R.drawable.ic_power_off;
+    private int ic_pressed = R.drawable.ic_power_base;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -160,7 +165,7 @@ public class DeviceSwitchActivity extends AppCompatActivity {
                 switch (motionEvent.getAction()){
                     case MotionEvent.ACTION_DOWN:
                         Log.d(TAG, "Button pressed");
-                        ivButton.setImageResource(R.drawable.digital_pressed);
+                        ivButton.setImageResource(ic_pressed);
                         tvOutput.setText(R.string.state_sending);
                         return true;
                     case MotionEvent.ACTION_UP:
@@ -182,16 +187,16 @@ public class DeviceSwitchActivity extends AppCompatActivity {
     private void updateScreen(){
         if (buttonState){
             tvOutput.setText(R.string.state_on);
-            ivButton.setImageResource(R.drawable.digital_on);
+            ivButton.setImageResource(ic_on);
         } else{
             tvOutput.setText(R.string.state_off);
-            ivButton.setImageResource(R.drawable.digital_off);
+            ivButton.setImageResource(ic_off);
         }
     }
 
     private void updateScreenUnknown(){
         tvOutput.setText(R.string.state_unknown);
-        ivButton.setImageResource(R.drawable.ic_launcher_foreground);
+        ivButton.setImageResource(ic_unavailable);
     }
 
     @Override

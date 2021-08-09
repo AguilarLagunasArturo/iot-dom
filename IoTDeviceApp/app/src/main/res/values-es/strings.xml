@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">IoTDeviceApp</string>
+
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Control your IoT Device</string>
+    <string name="nav_header_subtitle">SS2021</string>
+    <string name="action_source_code">Source code</string>
+    <string name="access_point">IoT Device AP</string>
+
+    <string name="menu_add_device">Add device</string>
+    <string name="menu_my_devices">My devices</string>
+    <string name="menu_about">About</string>
+
+    <string name="lorem_long">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+    <string name="lorem_short">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
+
+    <string name="act_scanning">Scanning</string>
+    <string name="act_done">Done</string>
+
+    <string name="wifi_scan">Scan IoT Devices</string>
+    <string name="wifi_enabled">WiFi enabled</string>
+    <string name="wifi_enable_error">Cannot enable WiFi</string>
+    <string name="wifi_not_found">There is no WiFi Networks available</string>
+
+    <string name="state_on">ON</string>
+    <string name="state_off">OFF</string>
+    <string name="state_sending">SENDING</string>
+    <string name="state_unknown">UNKNOWN</string>
+    <string name="state_loading">LOADING</string>
+
+    <string name="toast_device_unavailable">Device unavailable</string>
+    <string name="toast_error">An error occurred</string>
+    <string name="toast_not_a_device">This is not an IoT device</string>
+    <string name="toast_waiting_for_device">Waiting for device</string>
+
+    <string name="cannot_use_app">Cannot use the app without the permission</string>
+
+    <string name="how_to_title">How to use</string>
+    <string name="how_to">
+        To activate your IoT Device select the Add Device window in the navigation panel.
+        Select your IoT Device, wait for the following pop-up menu and chose to open it with this App.
+        To control your IoT Device select the My Devices window in the navigation panel.
+        Select your IoT Device, and you can start using your IoT Device.
+    </string>
+
+</resources>

@@ -76,7 +76,9 @@ public class AddDeviceFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if (wifiList.get(i).SSID.equals(AP_ID)){
-                    Toast.makeText(getActivity(), String.format("%s : %s", R.string.toast_waiting_for_device, wifiList.get(i).SSID), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), String.format("%s : %s",
+                            getActivity().getString(R.string.toast_waiting_for_device),
+                            wifiList.get(i).SSID), Toast.LENGTH_LONG).show();
                     connectToWifi(wifiList.get(i).SSID);
                     MainActivity.navController.navigate(R.id.nav_my_devices);
                 }else{

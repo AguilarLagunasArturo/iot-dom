@@ -55,7 +55,7 @@
                 app:layout_constraintRight_toRightOf="parent"/>
             <ImageView
                 android:id="@+id/indication_0"
-                android:src="@drawable/ic_launcher_foreground"
+                android:src="@drawable/ic_android"
                 android:layout_width="100dp"
                 android:layout_height="100dp"/>
 
@@ -81,7 +81,7 @@
 
             <ImageView
                 android:id="@+id/indication_1"
-                android:src="@drawable/ic_launcher_foreground"
+                android:src="@drawable/ic_android"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginBottom="@dimen/small_margin"/>

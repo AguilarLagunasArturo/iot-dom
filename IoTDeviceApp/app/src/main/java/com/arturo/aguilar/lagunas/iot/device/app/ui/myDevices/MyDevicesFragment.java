@@ -59,10 +59,10 @@ public class MyDevicesFragment extends Fragment {
 
             switch (type) {
                 case "SWITCH":
-                    icons.add(R.drawable.digital_pressed);
+                    icons.add(R.drawable.ic_switch_icon);
                     break;
                 default:
-                    icons.add(R.drawable.ic_launcher_foreground);
+                    icons.add(R.drawable.ic_android);
                     break;
             }
 
