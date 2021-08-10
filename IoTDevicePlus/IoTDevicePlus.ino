@@ -11,7 +11,7 @@
 #include <EEPROM.h>
 
 /* Constantes */
-const String UUID =     "iot-skill-01";     // Identificador unico del dispositivo
+const String UUID =     "iot-skill-00";     // Identificador unico del dispositivo
 #define TYPE            "SWITCH"            // Identificador para el tipo de dispositivo
 #define AP_TITLE        "SS2021 - LOGGER"   // Identificador para el tipo de dispositivo
 #define RESET_PIN       14                  // GPIO para controlar el reset
@@ -22,6 +22,7 @@ const String UUID =     "iot-skill-01";     // Identificador unico del dispositi
 #define HTTPS_PORT      443                 // HTTPS Port
 #define ATTEMPS         30                  // Connection attemps -> 15 seg
 #define URL             "https://km83gb3bwa.execute-api.us-east-1.amazonaws.com/default/iot-skill-api"
+#define SET_UP_DEVICE   "{\"action\": \"setup-device\", \"device-id\": \"" + UUID + "\"}"
 #define GET_STATE       "{\"action\": \"get-device-state\", \"device-id\": \"" + UUID + "\"}"
 #define SET_CONNECTION  "{\"action\": \"set-device-connection\", \"device-id\": \"" + UUID + "\"}"
 #define SET_ON          "{\"action\": \"set-device-state\", \"device-id\": \"" + UUID + "\", \"value\": \"ON\"}"
@@ -249,7 +250,7 @@ void credentials(){
                 "  </head>"
                 "  <body>"
                 "    <div class='container'>"
-                "      <h4 id='header'>Conectando dispositivo <span id='countdown'>30</span></h4> <br>"
+                "      <h4 id='header'>Configurando dispositivo <span id='countdown'>30</span></h4> <br>"
                 "      <form action='/' method='post'>"
                 "        <div class='input'>"
                 "          <input type='text' name='o' value='");
@@ -401,7 +402,7 @@ void setup() {
   clientSecure.connect(URL, HTTPS_PORT);
 
   // actualiza el estado del dispositivo digital y físico
-  sw_digital_last_state = postRequest(URL, SET_OFF);
+  sw_digital_last_state = postRequest(URL, SET_UP_DEVICE);
   sw_last_state = digitalRead(SW_PIN);
   // DEBUG: SET PHYSICAL STATE TO LAST DIGITAL STATE AND UPDATE SW_TOGGLE
   // DEBUG: TEST THE TOGGLE STATES WHEN DB_ITEM "ON" && "OFF"

@@ -1,11 +1,15 @@
 package com.arturo.aguilar.lagunas.iot.device.app;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -204,6 +208,19 @@ public class DeviceSwitchActivity extends AppCompatActivity {
         Log.d(TAG, "onDestroy");
         handler.removeCallbacks(runnable);
         super.onDestroy();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_settings:
+                Intent open_browser = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse(getString(R.string.github_url)));
+                startActivity(open_browser);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override

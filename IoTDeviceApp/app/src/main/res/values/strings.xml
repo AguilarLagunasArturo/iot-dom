@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">IoTDeviceApp</string>
 
+    <string name="github_url">https://github.com/AguilarLagunasArturo/iot-dom</string>
+
     <string name="nav_header_title">Control your IoT Device</string>
     <string name="nav_header_subtitle">SS2021</string>
     <string name="action_source_code">Source code</string>
