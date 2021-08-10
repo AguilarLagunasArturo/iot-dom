@@ -39,7 +39,6 @@ public class DeviceSwitchActivity extends AppCompatActivity {
     private RequestQueue queue;
     private StringRequest availableRequest;
     private StringRequest toggleRequest;
-    private StringRequest getStateRequest;
 
     private ImageView ivButton;
     private TextView tvOutput;

@@ -6,12 +6,10 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.Menu;
 import android.widget.Toast;
 
 import com.arturo.aguilar.lagunas.iot.device.app.utils.DataBase;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
@@ -26,9 +24,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.arturo.aguilar.lagunas.iot.device.app.databinding.ActivityMainBinding;
 
-import kotlinx.coroutines.BuildersKt;
-
 public class MainActivity extends AppCompatActivity {
+
+    private final String TAG = "Main";
+
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
     public static NavController navController;
