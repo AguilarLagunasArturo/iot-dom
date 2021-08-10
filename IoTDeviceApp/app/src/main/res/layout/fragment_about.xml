@@ -25,66 +25,191 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"/>
             <TextView
-                android:id="@+id/text_0"
-                android:layout_width="wrap_content"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/small_margin"
-                android:text="@string/how_to"
-                android:textSize="@dimen/text_text"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"/>
-
-            <TextView
-                android:id="@+id/subtitle_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/small_margin"
-                android:text="@string/menu_add_device"
-                android:textSize="@dimen/text_subtitle"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"/>
-
-            <TextView
-                android:id="@+id/text_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/small_margin"
-                android:text="@string/lorem_short"
-                android:textSize="@dimen/text_text"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"/>
-            <ImageView
-                android:id="@+id/indication_0"
-                android:src="@drawable/ic_android"
-                android:layout_width="100dp"
-                android:layout_height="100dp"/>
-
-            <TextView
-                android:id="@+id/subtitle_2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/small_margin"
-                android:text="@string/menu_my_devices"
-                android:textSize="@dimen/text_subtitle"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"/>
-
-            <TextView
-                android:id="@+id/text_2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/small_margin"
-                android:text="@string/lorem_short"
-                android:textSize="@dimen/text_text"
+                android:text="@string/how_to_1"
+                android:textSize="@dimen/text_list_title"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"/>
 
             <ImageView
-                android:id="@+id/indication_1"
-                android:src="@drawable/ic_android"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:src="@drawable/ss_1"
+                android:layout_margin="@dimen/small_margin"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/ss_h"
                 android:layout_marginBottom="@dimen/small_margin"/>
+            <TextView
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/small_margin"
+                android:text="@string/how_to_2"
+                android:textSize="@dimen/text_list_title"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
+
+            <ImageView
+                android:src="@drawable/ss_2"
+                android:layout_margin="@dimen/small_margin"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/ss_h"
+                android:layout_marginBottom="@dimen/small_margin"/>
+            <TextView
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/small_margin"
+                android:text="@string/how_to_3"
+                android:textSize="@dimen/text_list_title"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
+
+            <ImageView
+                android:src="@drawable/ss_3"
+                android:layout_margin="@dimen/small_margin"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/ss_h"
+                android:layout_marginBottom="@dimen/small_margin"/>
+            <TextView
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/small_margin"
+                android:text="@string/how_to_4"
+                android:textSize="@dimen/text_list_title"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
+
+            <ImageView
+                android:src="@drawable/ss_4"
+                android:layout_margin="@dimen/small_margin"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/ss_h"
+                android:layout_marginBottom="@dimen/small_margin"/>
+            <TextView
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/small_margin"
+                android:text="@string/how_to_5"
+                android:textSize="@dimen/text_list_title"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
+
+            <ImageView
+                android:src="@drawable/ss_5"
+                android:layout_margin="@dimen/small_margin"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/ss_h"
+                android:layout_marginBottom="@dimen/small_margin"/>
+            <TextView
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/small_margin"
+                android:text="@string/how_to_6"
+                android:textSize="@dimen/text_list_title"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
+
+            <ImageView
+                android:src="@drawable/ss_6"
+                android:layout_margin="@dimen/small_margin"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/ss_h"
+                android:layout_marginBottom="@dimen/small_margin"/>
+            <TextView
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/small_margin"
+                android:text="@string/how_to_7"
+                android:textSize="@dimen/text_list_title"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
+
+            <ImageView
+                android:src="@drawable/ss_7"
+                android:layout_margin="@dimen/small_margin"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/ss_h"
+                android:layout_marginBottom="@dimen/small_margin"/>
+            <TextView
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/small_margin"
+                android:text="@string/how_to_8"
+                android:textSize="@dimen/text_list_title"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
+
+            <ImageView
+                android:src="@drawable/ss_8"
+                android:layout_margin="@dimen/small_margin"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/ss_h"
+                android:layout_marginBottom="@dimen/small_margin"/>
+            <TextView
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/small_margin"
+                android:text="@string/how_to_9"
+                android:textSize="@dimen/text_list_title"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
+
+            <ImageView
+                android:src="@drawable/ss_9"
+                android:layout_margin="@dimen/small_margin"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/ss_h"
+                android:layout_marginBottom="@dimen/small_margin"/>
+            <TextView
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/small_margin"
+                android:text="@string/how_to_10"
+                android:textSize="@dimen/text_list_title"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
+
+            <ImageView
+                android:src="@drawable/ss_10"
+                android:layout_margin="@dimen/small_margin"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/ss_h"
+                android:layout_marginBottom="@dimen/small_margin"/>
+            <TextView
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/small_margin"
+                android:text="@string/how_to_11"
+                android:textSize="@dimen/text_list_title"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
+
+            <ImageView
+                android:src="@drawable/ss_11"
+                android:layout_margin="@dimen/small_margin"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/ss_h"
+                android:layout_marginBottom="@dimen/small_margin"/>
+
+            <TextView
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/small_margin"
+                android:text="@string/how_to_12"
+                android:textSize="@dimen/text_list_title"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
 
         </LinearLayout>
     </ScrollView>

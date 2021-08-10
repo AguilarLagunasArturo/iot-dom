@@ -1,13 +1,10 @@
 <resources>
     <string name="app_name">IoTDeviceApp</string>
 
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Control your IoT Device</string>
     <string name="nav_header_subtitle">SS2021</string>
     <string name="action_source_code">Source code</string>
-    <string name="access_point">IoT Device AP</string>
+    <string name="access_point">Adding IoT Device</string>
 
     <string name="menu_add_device">Add device</string>
     <string name="menu_my_devices">My devices</string>
@@ -17,7 +14,6 @@
     <string name="lorem_short">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
 
     <string name="act_scanning">Scanning</string>
-    <string name="act_done">Done</string>
 
     <string name="wifi_scan">Scan IoT Devices</string>
     <string name="wifi_enabled">WiFi enabled</string>
@@ -38,11 +34,41 @@
     <string name="cannot_use_app">Cannot use the app without the permission</string>
 
     <string name="how_to_title">How to use</string>
-    <string name="how_to">
-        To activate your IoT Device select the Add Device window in the navigation panel.
-        Select your IoT Device, wait for the following pop-up menu and chose to open it with this App.
-        To control your IoT Device select the My Devices window in the navigation panel.
-        Select your IoT Device, and you can start using your IoT Device.
+    <string name="how_to_1">
+        Open navigation drawer and select Add Device
+    </string>
+    <string name="how_to_2">
+        Scan IoT Devices
+    </string>
+    <string name="how_to_3">
+        Select SS2021 - LOGGER
+    </string>
+    <string name="how_to_4">
+        Wait for connection with the IoT Device
+    </string>
+    <string name="how_to_5">
+        Choose complete action with Adding IoT Device
+    </string>
+    <string name="how_to_6">
+        Select your WiFi Network
+    </string>
+    <string name="how_to_7">
+        Input your WiFi Network password and press OK
+    </string>
+    <string name="how_to_8">
+        Wait until the IoT Device is added
+    </string>
+    <string name="how_to_9">
+        Once added it should look like this
+    </string>
+    <string name="how_to_10">
+        Select the IoT Device
+    </string>
+    <string name="how_to_11">
+        Wait until Device detected
+    </string>
+    <string name="how_to_12">
+        Done, now you can control your IoT Device
     </string>
 
 </resources>

@@ -11,6 +11,8 @@
     <dimen name="middle_margin">32dp</dimen>
     <dimen name="large_margin">64dp</dimen>
 
+    <dimen name="ss_h">420dp</dimen>
+
     <dimen name="text_title">64sp</dimen>
     <dimen name="text_subtitle">32sp</dimen>
     <dimen name="text_text">16sp</dimen>
