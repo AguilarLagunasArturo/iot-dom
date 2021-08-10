@@ -211,6 +211,20 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"/>
 
+            <ImageView
+                android:src="@drawable/ss_12"
+                android:layout_margin="@dimen/small_margin"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/ss_h"
+                android:layout_marginBottom="@dimen/small_margin"/>
+
+            <ImageView
+                android:src="@drawable/ss_13"
+                android:layout_margin="@dimen/small_margin"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/ss_h"
+                android:layout_marginBottom="@dimen/small_margin"/>
+
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

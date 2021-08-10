@@ -86,6 +86,8 @@ public class MainActivity extends AppCompatActivity {
         // Other 'case' lines to check for other
         // permissions this app might request.
     }
+    
+    
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -24,7 +24,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3723958333333333" />
         <entry key="app/src/main/res/layout/app_bar_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.25271739130434784" />
-        <entry key="app/src/main/res/layout/fragment_about.xml" value="0.21079009433962265" />
+        <entry key="app/src/main/res/layout/fragment_about.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_add_device.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_gallery.xml" value="0.3723958333333333" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.3723958333333333" />
