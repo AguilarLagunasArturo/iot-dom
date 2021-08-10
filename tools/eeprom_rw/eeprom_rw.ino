@@ -1,8 +1,8 @@
 #include <EEPROM.h>
 
 String boot_state = "0\n";
-String ssid = "bother_xEDasd2.4_2\n";
-String pass = "uH0L0uYboaHanck\n";
+String ssid = "nwtwork\n";
+String pass = "password\n";
 String s_ssid = "";
 String s_pass = "";
 

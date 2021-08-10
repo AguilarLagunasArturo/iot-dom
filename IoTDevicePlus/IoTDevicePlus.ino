@@ -11,7 +11,7 @@
 #include <EEPROM.h>
 
 /* Constantes */
-const String UUID =     "iot-skill-00";     // Identificador unico del dispositivo
+const String UUID =     "iot-skill-01";     // Identificador unico del dispositivo
 #define TYPE            "SWITCH"            // Identificador para el tipo de dispositivo
 #define AP_TITLE        "SS2021 - LOGGER"   // Identificador para el tipo de dispositivo
 #define RESET_PIN       14                  // GPIO para controlar el reset
