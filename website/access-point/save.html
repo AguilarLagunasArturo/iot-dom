@@ -5,57 +5,56 @@
     <meta name='viewport' content='width=device-width'>
     <title>CaptivePortal</title>
     <style>
-    html{
-        display: table;
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
-    }
-    body {
-        display: table-cell;
-        vertical-align: middle;
-        margin: 0;
-        padding: 0;
-        color: #F2F2F2;
-        background: #232323;
-    }
-    .container {
-        background-color: #101010;
-        margin: auto;
-        padding: 16px;
-        width: 280px;
-        border-radius: 0.8em;
-        text-align: center;
-    }
-    .input {
-        margin: auto;
-        width: 240px;
-        border-radius: 4px;
-        background-color: #151515;
-        margin-top: 15px;
-        margin-bottom: 15px;
-    }
-    input[type=password], input[type=text], button[type=submit], select{
-        color: #949494;
-        margin: 0;
-        background-color: #151515;
-        border: 1px solid #151515;
-        padding: 8px 0px;
-        border-radius: 3px;
-        width: 80%;
-    }
-    button[type=submit]{
-        width: 100%;
-    }
-    button[type=submit]:active {
-        background-color: gray;
-    }
+      html{
+          display: table;
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 100%;
+          width: 100%;
+      }
+      body {
+          display: table-cell;
+          vertical-align: middle;
+          margin: 0;
+          padding: 0;
+          color: #F2F2F2;
+          background: #232323;
+      }
+      .container {
+          background-color: #101010;
+          margin: auto;
+          padding: 16px;
+          width: 280px;
+          border-radius: 0.8em;
+          text-align: center;
+      }
+      .input {
+          margin: auto;
+          width: 240px;
+          border-radius: 4px;
+          background-color: #151515;
+          margin-top: 15px;
+          margin-bottom: 15px;
+      }
+      input[type=password], input[type=text], button[type=submit], select{
+          color: #949494;
+          margin: 0;
+          background-color: #151515;
+          border: 1px solid #151515;
+          padding: 8px 0px;
+          border-radius: 3px;
+          width: 80%;
+      }
+      button[type=submit]{
+          width: 100%;
+      }
+      button[type=submit]:active {
+          background-color: gray;
+      }
     </style>
-
     <script type='text/javascript'>
-        var seconds = 15;
+        var seconds = 5;
         var countdown = setInterval(function() {
           seconds--;
           if (seconds <= 0) {
@@ -71,8 +70,8 @@
   </head>
   <body>
     <div class='container'>
-      <h3 id='header'>Conectando <span id='countdown'>15</span></h3> <br>
-      <form action='/home/aal/Github/iot-dom/wifi_credentials/index.html' method='post'>
+      <h3 id='header'>Configurando dispositivo <span id='countdown'>5</span></h3> <br>
+      <form action='index.html' method='post'>
         <div class='input'>
           <input type='text' name='p' value='SSID' disabled>
         </div>

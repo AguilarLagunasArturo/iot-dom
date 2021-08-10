@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang='en' dir='ltr'>
+  <head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width'>
+    <title>Controlador web</title>
+    <style>
+      html{
+          display: table;
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 100%;
+          width: 100%;
+      }
+      body {
+          display: table-cell;
+          vertical-align: middle;
+          margin: 0;
+          padding: 0;
+          color: #F2F2F2;
+          background: #232323;
+      }
+      .container {
+          background-color: #101010;
+          margin: auto;
+          padding: 16px;
+          width: 280px;
+          border-radius: 0.8em;
+          text-align: center;
+      }
+      .input {
+          margin: auto;
+          width: 240px;
+          border-radius: 4px;
+          background-color: #151515;
+          margin-top: 15px;
+          margin-bottom: 15px;
+      }
+      input[type=password], input[type=text], button, select{
+          color: #949494;
+          background-color: #151515;
+          border: 1px solid #151515;
+          padding: 8px 0px;
+          border-radius: 3px;
+          width: 80%;
+      }
+      button[type=submit]{
+          width: 100%;
+      }
+      button[type=submit]:active {
+          background-color: gray;
+      }
+    </style>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript">
+      JSONTest = function() {
+        console.log('button');
+        $.ajax({
+            url: "https://km83gb3bwa.execute-api.us-east-1.amazonaws.com/default/iot-skill-api",
+            type: "POST",
+            data: '{"action": "toggle-device-state", "device-id": "iot-skill-00"}',
+            dataType: "json",
+            success: function (result) {
+                switch (result) {
+                    case true:
+                        processResponse(result);
+                        break;
+                    default:
+                        console.log(result);
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(xhr.status);
+                alert(thrownError);
+            }
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <div class='container'>
+      <h3>Dispositivo</h3> <br>
+      <form>
+        <div class='input'>
+          <input type='text' value="iot-skill-00" disabled>
+        </div>
+        <div class='input'>
+          <input type='text' value="toggle-device" disabled>
+        </div>
+        <br> <br>
+        <div class='input'>
+          <button onclick="JSONTest()">ON / OFF</button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

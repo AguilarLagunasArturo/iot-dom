@@ -1,26 +1,19 @@
-# SS 2021
-
-## TODO:
-- __Code__
-  - NodeMcu
-    - Connect Server/Client
-      - Via Smartphone
-      - Via Alexa
-      - Via Website
-  - App
-    - Mobile
-    - Web
-- __Sim__
-  - Circuit
-    - Micro
-      - Switch + Reles
-- __Schematics__
-  - Case
-    - PCB
-    - Power supply
-    - Output
-  - PCB
-- __Docs__
-  - User Manual
-  - Tech Manual
-  - Lab Manual
+# SS2021
+## Índice:
+- __Software__
+  - Aplicacion móvil (Android)
+    - IoTDeviceApp
+  - Aplicacion de escritorio
+    - Sitio web (local)
+  - Microcontrolador
+    - IoTDevice
+    - IoTDevicePlus
+  - AlexaSkill
+  - Servidor / API / Base de datos
+- __Esquemas__
+  - IoTDevice
+  - IoTDevicePlus
+- __Manuales__
+  - Usuario
+  - Técnico
+  - Prácticas
