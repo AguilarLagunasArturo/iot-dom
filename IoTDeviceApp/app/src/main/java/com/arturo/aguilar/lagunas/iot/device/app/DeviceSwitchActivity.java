@@ -34,7 +34,7 @@ public class DeviceSwitchActivity extends AppCompatActivity {
 
     private final String TAG = "DEBUG DeviceActivity";
 
-    private final String url = "https://km83gb3bwa.execute-api.us-east-1.amazonaws.com/default/iot-skill-api";
+    private String url;
     private final int refreshRate = 4000;
     private RequestQueue queue;
     private StringRequest availableRequest;
@@ -62,6 +62,7 @@ public class DeviceSwitchActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         deviceUUID = getIntent().getStringExtra("uuid");
         setTitle( deviceUUID );
+        url = getString(R.string.api);
 
         ivButton = (ImageView) findViewById(R.id.iv_toggle);
         tvOutput = (TextView) findViewById(R.id.tv_output);

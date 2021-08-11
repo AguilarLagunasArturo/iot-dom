@@ -14,6 +14,5 @@
   - IoTDevice
   - IoTDevicePlus
 - __Manuales__
-  - Usuario
-  - Técnico
-  - Prácticas
+  - Usuario (Instructivo)
+  - Técnico / Prácticas

@@ -23,7 +23,7 @@ import com.arturo.aguilar.lagunas.iot.device.app.utils.DataBase;
 public class AccessPointHandlerActivity extends AppCompatActivity {
 
     private final String TAG = "DEBUG APHandlerActivity";
-    private final String AP_ID = "SS2021 - LOGGER";
+    private String AP_ID;
 
     private String uuid;
     private String type;
@@ -39,6 +39,7 @@ public class AccessPointHandlerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_access_point_handler);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        AP_ID = getString(R.string.ap);
         db = new DataBase(this);
         db.setupDB();
 

@@ -43,11 +43,12 @@ public class AddDeviceFragment extends Fragment {
 
     private FragmentAddDeviceBinding binding;
     private final String TAG = "DEBUG ADD DEVICE";
-    private final String AP_ID = "SS2021 - LOGGER";
+    private String AP_ID;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         Log.d(TAG, "INIT FRAGMENT ADD DEVICE");
+        AP_ID = getString(R.string.ap);
 
         binding = FragmentAddDeviceBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
