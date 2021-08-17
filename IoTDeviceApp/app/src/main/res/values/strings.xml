@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">IoTDeviceApp</string>
+    <string name="app_name">IoT Device App</string>
 
     <string name="github_url">https://github.com/AguilarLagunasArturo/iot-dom</string>
     <string name="api">https://km83gb3bwa.execute-api.us-east-1.amazonaws.com/default/iot-skill-api</string>
@@ -74,5 +74,16 @@
     <string name="how_to_12">
         Done, now you can control your IoT Device
     </string>
+
+    <string name="alert_title">Add IoT Device</string>
+    <string name="alert_description">To manually add your IoT Device type Its UUID and press OK</string>
+
+    <string name="alert_uuid">UUID</string>
+    <string name="alert_hint_uuid">iot-skill-01</string>
+    <string name="alert_type">TYPE</string>
+    <string name="alert_hint_type">SWITCH</string>
+
+    <string name="ok">OK</string>
+    <string name="cancel">CANCEL</string>
 
 </resources>

@@ -68,4 +68,14 @@
         Listo, ahora puedes controlar tu dispositivo
     </string>
 
+    <string name="alert_title">Agregar dispositivo IoT</string>
+    <string name="alert_description">Para agregar tu dispositivo IoT manualmente, introduce su identificador único y presiona OK</string>
+    <string name="alert_uuid">UUID</string>
+    <string name="alert_hint_uuid">iot-skill-01</string>
+    <string name="alert_type">TIPO</string>
+    <string name="alert_hint_type">SWITCH</string>
+
+    <string name="ok">OK</string>
+    <string name="cancel">CANCELAR</string>
+
 </resources>
