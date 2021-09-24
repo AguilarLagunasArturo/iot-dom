@@ -1,4 +1,4 @@
-# SS2021
+# Servicio Social (2021)
 ## Índice:
 - __Software__
   - Aplicacion móvil (Android)
@@ -16,3 +16,5 @@
 - __Manuales__
   - Usuario (Instructivo)
   - Técnico / Prácticas
+____
+#### Tecnológico Nacional de México | Campus Veracruz
