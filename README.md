@@ -48,6 +48,6 @@
 
 |Sitio web local (Alexa)|
 |:-|
-|![Web](.src/alexa/preview.jpg)|
+|![Web](.src/website/preview.png)|
 ____
 #### *Tecnológico Nacional de México | Campus Veracruz*
