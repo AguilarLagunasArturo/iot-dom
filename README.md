@@ -1,6 +1,5 @@
 # Servicio Social (2021)
-#### *Tecnológico Nacional de México | Campus Veracruz*
-____
+*Tecnológico Nacional de México | Campus Veracruz*
 ## Índice:
 - __Software__
   - Aplicacion móvil (Android)
@@ -23,12 +22,21 @@ ____
 ## Esquemas
 ### Diagrama del proyecto
 ![Proyecto](.src/diagrams/iot_device_diagram.png)
-### Diagrama de flujo para el microcontrolador
-![Flujo](.src/diagrams/iot_device_flow.png)
+### Diagrama de flujo para el microcontrolador  
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/AguilarLagunasArturo/iot-dom/main/.src/diagrams/iot_device_flow.png" alt="Flujo"/>
+</p>  
+
 ### Circuito electrónico
-![Circuito](.src/diagrams/circuit.png)
-### Base de datos
-![DB](.src/diagrams/db.png)
+![Circuito](.src/diagrams/circuit.png)  
+
+### Base de datos  
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/AguilarLagunasArturo/iot-dom/main/.src/diagrams/db.png" alt="DB"/>
+</p>  
+
 ## Vista previa
 |Aplicación móvil (Android)|
 |:-|
