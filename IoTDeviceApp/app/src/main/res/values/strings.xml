@@ -2,7 +2,7 @@
     <string name="app_name">IoT Device App</string>
 
     <string name="github_url">https://github.com/AguilarLagunasArturo/iot-dom</string>
-    <string name="api">api-url</string>
+    <string name="api">https://km83gb3bwa.execute-api.us-east-1.amazonaws.com/default/iot-skill-api</string>
     <string name="ap">SS2021 - LOGGER</string>
 
     <string name="nav_header_title">Control your IoT Device</string>
